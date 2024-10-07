@@ -1,7 +1,6 @@
 <template>
     <button class="button" :style="buttonStyle" >
-      <slot></slot>
-      <Icon name="icon-park-outline:right-c" color="white" />
+        <Icon name="bi:play-btn" color="white" size="20"/>
     </button>
   </template>
   
@@ -31,18 +30,15 @@
   <style scoped>
   .button {
     cursor: pointer;
-    padding: 8px 16px;
+    padding: 8px;
     border-radius: 4px;
     font-family: Impact;
     font-size: 14px;
-    font-weight: 100;
+    font-weight: 400;
     line-height: 20px;
     letter-spacing: 1px;
     text-align: center;
     text-transform: uppercase;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 4px;
   }
   </style>

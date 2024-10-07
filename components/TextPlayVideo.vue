@@ -1,7 +1,7 @@
 <template>
     <button class="button" :style="buttonStyle" >
       <slot></slot>
-      <Icon name="icon-park-outline:right-c" color="white" />
+      <Icon name="bi:play-btn" color="white" />
     </button>
   </template>
   

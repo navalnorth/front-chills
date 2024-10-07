@@ -1,5 +1,5 @@
 <template>
-  <button :style="buttonStyle">
+  <button class="button" :style="buttonStyle" >
     <slot></slot>
   </button>
 </template>
@@ -8,25 +8,37 @@
 const props = defineProps({
   textColor: {
     type: String,
-    default: ''
+    default: 'var(--text-color-light)'
   },
-  backgroundColor: {
+  background: {
     type: String,
-    default: ''
+    default: 'var(--border-none)'
   },
-  borderColor: {
+  borderSolid: {
     type: String,
-    default: ''
+    default: 'var(--border-none)'
   }
 });
 
 const buttonStyle = computed(() => ({
   color: props.textColor,
-  backgroundColor: props.backgroundColor,
-  border: `2px solid ${props.borderColor}`,
-  padding: '8px 16px',
-  borderRadius: '5px',
-  fontFamily: 'Impact',
-  cursor: 'pointer'
+  background: props.background,
+  border: `${props.borderSolid}`,
 }));
 </script>
+
+<style scoped>
+.button {
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 4px;
+  font-family: Impact;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 20px;
+  letter-spacing: 1px;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 2.4px
+}
+</style>
