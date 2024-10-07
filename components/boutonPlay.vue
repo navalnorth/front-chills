@@ -1,34 +1,34 @@
 <template>
-    <button class="button" :style="buttonStyle" >
-        <Icon name="icon-park-outline:right-c" color="white" size="20"/>
+    <button class="button" :style="buttonStyle">
+        <Icon name="icon-park-outline:right-c" size="20" />
     </button>
-  </template>
-  
-  <script setup>
-  const props = defineProps({
+</template>
+
+<script setup>
+const props = defineProps({
     textColor: {
-      type: String,
-      default: ''
+        type: String,
+        default: ''
     },
     background: {
-      type: String,
-      default: ''
+        type: String,
+        default: ''
     },
     borderSolid: {
-      type: String,
-      default: ''
+        type: String,
+        default: ''
     }
-  });
-  
-  const buttonStyle = computed(() => ({
+});
+
+const buttonStyle = computed(() => ({
     color: props.textColor,
     background: props.background,
     border: `${props.borderSolid}`,
-  }));
-  </script>
-  
-  <style scoped>
-  .button {
+}));
+</script>
+
+<style scoped>
+.button {
     cursor: pointer;
     padding: 8px;
     border-radius: 4px;
@@ -40,5 +40,5 @@
     text-align: center;
     text-transform: uppercase;
     display: flex;
-  }
-  </style>
+}
+</style>

@@ -2,23 +2,32 @@
 
     <div>
         <h1>Welcome</h1>
-        <BoutonText background="var(--colorbg2)" textColor="var(--textcolor2)" borderSolid="var(--border2)">
+        <BoutonText background="var(--colorbgBlanc)" textColor="var(--textcolorRouge)" borderSolid="var(--border2Rouge)">
              Button
         </BoutonText>
         <br>
-        <TextPlay background="var(--colorbg5)" textColor="var(--textcolor3)" borderSolid="var(--border1)">
+        <TextPlay background="var(--colorbgGradientJaune)" textColor="var(--textcolorNoir)" borderSolid="var(--borderNone)">
             Bouton flèche 
         </TextPlay>
         <br>
-        <BoutonPlay background="var(--colorbg2)" textColor="var(--textcolor2)" borderSolid="var(--border2)">
+        <BoutonPlay background="var(--colorbgBlanc)" textColor="var(--textcolorRouge)" borderSolid="var(--border2Rouge)">
         </BoutonPlay>
         <br>
-        <BoutonPlayVideo background="var(--colorbg1)" textColor="var(--textcolor1)" borderSolid="var(--border1)">
+        <BoutonPlayVideo background="var(--colorbgGradientRouge)" textColor="var(--textcolorBlanc)" borderSolid="var(--borderNone)">
         </BoutonPlayVideo>
         <br>
-        <TextPlayVideo background="var(--colorbg1)" textColor="var(--textcolor1)" borderSolid="var(--border1)">
+        <ToggleBorder background="var(--colorbgBlanc)" backgroundRond="var(--colorbgRouge)"/>
+        <br>
+        <ToggleNature />
+        <br>
+        <ToggleBlanc />
+        <br>
+        <ToggleNatureBis />
+        <br>
+        <TextPlayVideo background="var(--colorbgGradientRouge)" textColor="var(--textcolorBlanc)" borderSolid="var(--borderNone)">
             Bouton flèche 
         </TextPlayVideo>
+        <br>
     </div>
 
 </template>

@@ -1,6 +1,6 @@
 <template>
     <button class="button" :style="buttonStyle" >
-        <Icon name="bi:play-btn" color="white" size="20"/>
+        <Icon name="bi:play-btn" size="20"/>
     </button>
   </template>
   
