@@ -17,8 +17,9 @@
         <div class="footer-link-p">
           <u>NOTRE CATALOGUE</u>
         </div>
-        <AnOutlinedPlus class="footer-link-icon" />
-      </div>
+        <component :is="isCatalogueOpen ? AkMinus : AnOutlinedPlus" class="footer-link-icon" />
+        </div>
+
       <div class="footer-link-clicked" v-show="isCatalogueOpen">
         <div class="footer-link-clicked-item"><a href="">LIEN 1</a></div>
         <div class="footer-link-clicked-item"><a href="">LIEN 2</a></div>
@@ -30,7 +31,7 @@
         <div class="footer-link-p">
           <u>FOIRE AUX QUESTIONS</u>
         </div>
-        <AnOutlinedPlus class="footer-link-icon" />
+        <component :is="isFaqOpen ? AkMinus : AnOutlinedPlus" class="footer-link-icon" />
       </div>
       <div class="footer-link-clicked" v-show="isFaqOpen">
         <div class="footer-link-clicked-item"><a href="">LIEN 1</a></div>
@@ -42,9 +43,9 @@
       <!-- lien utile -->
       <div class="footer-link-content" @click="toggleLienUtile">
         <div class="footer-link-p">
-          <u>LIEN UTILE</u>
+          <u>LIENS UTILES</u>
         </div>
-        <AnOutlinedPlus class="footer-link-icon" />
+        <component :is="isLienUtileOpen ? AkMinus : AnOutlinedPlus" class="footer-link-icon" />
       </div>
       <div class="footer-link-clicked" v-show="isLienUtileOpen">
         <div class="footer-link-clicked-item"><a href="">LIEN 1</a></div>
@@ -76,7 +77,7 @@
   import { ref } from 'vue';
   import { PhThinInstagramLogo } from '@kalimahapps/vue-icons';
   import { PhThinFacebookLogo } from '@kalimahapps/vue-icons';
-  import { AnOutlinedPlus } from '@kalimahapps/vue-icons';
+  import { AnOutlinedPlus , AkMinus } from '@kalimahapps/vue-icons';
   
   // Déclare des variables réactives pour chaque section
   const isCatalogueOpen = ref(false);
@@ -151,6 +152,7 @@
   .footer-link-icon {
     font-size: 2rem;
     padding: 0 20px 0 0;
+    color: #ffffff;
   }
   
   .footer-link-clicked {
