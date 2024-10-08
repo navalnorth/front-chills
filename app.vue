@@ -1,10 +1,13 @@
 <template>
   <div>
-
     <NuxtRouteAnnouncer />
-    <Navbar />
+    <NavBar/>
     <NuxtPage />
     
 
   </div>
 </template>
+<script>
+
+
+</script>

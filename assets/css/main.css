@@ -1,0 +1,20 @@
+:root {
+    --colorbgGradientRouge: linear-gradient(180deg, #E03122 0%, #7A1B13 100%);
+    --colorbgBlanc: #ffffff;
+    --colorbgNoir: #000000;
+    --colorbgJaune: #D4C61B;
+    --colorbgGradientJaune: linear-gradient(180deg, #F2E438 0%, #ADA213 100%);
+    --colorbgMarin: #67C0BB;
+    --colorbgMarinFonce: #4DA4A6;
+    --colorbgRouge: #E03122;
+    --textcolorBlanc: #ffffff;
+    --textcolorRouge: #E03122;
+    --textcolorNoir: #000000;
+    --borderNone: none;
+    --border2Rouge: 2px solid #E03122;
+}
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
