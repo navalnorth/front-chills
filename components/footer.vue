@@ -1,37 +1,201 @@
 <template>
-    <div>
-        <div>logo</div>
-        <div>button</div>
-        <div>
-            <div></div>
-            <div></div>
-            <div></div>
+    <div class="footer">
+      <div class="footer-img">
+        <img src="/assets/img/Plan de travail 347_1.png" width="170px" alt="logo" />
+      </div>
+      <div class="footer-icon-social">
+        <div><PhThinInstagramLogo class="icon" /></div>
+        <div><PhThinFacebookLogo class="icon" /></div>
+        <div><img src="/assets/img/discord.png" alt="discord" width="45px" class="icon" /></div>
+      </div>
+      <div class="footer-question">
+        <p>UNE QUESTION ? <span><u>CONTACTEZ-NOUS !</u></span></p>
+      </div>
+  
+      <!-- NOTRE CATALOGUE -->
+      <div class="footer-link-content" @click="toggleCatalogue">
+        <div class="footer-link-p">
+          <u>NOTRE CATALOGUE</u>
         </div>
-        <div>
-            <p><span></span></p>
+        <component :is="isCatalogueOpen ? AkMinus : AnOutlinedPlus" class="footer-link-icon" />
         </div>
-        <!-- <div>
-           <div v-for="(link, index) in linkArray" :key="index">
-            <a :href="link.url">{{ link.text }}</a>
-           </div>
+
+      <div class="footer-link-clicked" v-show="isCatalogueOpen">
+        <div class="footer-link-clicked-item"><a href="">LIEN 1</a></div>
+        <div class="footer-link-clicked-item"><a href="">LIEN 2</a></div>
+        <div class="footer-link-clicked-item"><a href="">LIEN 3</a></div>
+        <div class="footer-link-clicked-item"><a href="">LIEN 4</a></div>
+      </div>
+  
+      <div class="footer-link-content" @click="toggleFaq">
+        <div class="footer-link-p">
+          <u>FOIRE AUX QUESTIONS</u>
         </div>
-        <div>
-           <div v-for="(link, index) in linkArray" :key="index">
-            <a :href="link.url">{{ link.text }}</a>
-           </div>
+        <component :is="isFaqOpen ? AkMinus : AnOutlinedPlus" class="footer-link-icon" />
+      </div>
+      <div class="footer-link-clicked" v-show="isFaqOpen">
+        <div class="footer-link-clicked-item"><a href="">LIEN 1</a></div>
+        <div class="footer-link-clicked-item"><a href="">LIEN 2</a></div>
+        <div class="footer-link-clicked-item"><a href="">LIEN 3</a></div>
+        <div class="footer-link-clicked-item"><a href="">LIEN 4</a></div>
+      </div>
+
+      <!-- lien utile -->
+      <div class="footer-link-content" @click="toggleLienUtile">
+        <div class="footer-link-p">
+          <u>LIENS UTILES</u>
         </div>
-        <div>
-           <div v-for="(link, index) in linkArray" :key="index">
-            <a :href="link.url">{{ link.text }}</a>
-           </div>
-        </div> -->
+        <component :is="isLienUtileOpen ? AkMinus : AnOutlinedPlus" class="footer-link-icon" />
+      </div>
+      <div class="footer-link-clicked" v-show="isLienUtileOpen">
+        <div class="footer-link-clicked-item"><a href="">LIEN 1</a></div>
+        <div class="footer-link-clicked-item"><a href="">LIEN 2</a></div>
+        <div class="footer-link-clicked-item"><a href="">LIEN 3</a></div>
+        <div class="footer-link-clicked-item"><a href="">LIEN 4</a></div>
+      </div>
+  
+      <!-- Mentions légales -->
+      <div class="footer-mention">
+        <div class="footer-mention-line">Informations légales</div>
+        <div class="footer-mention-lineTwo">
+          <div>Mentions légales</div>
+          <div>|</div>
+          <div>Protection des données</div>
+          <div>|</div>
+          <div>Politique des cookies</div>
+        </div>
+        <div class="footer-mention-lineTwo">
+          <div>Conditions générales de vente</div>
+          <div>|</div>
+          <div>Conditions d'utilisation</div>
+        </div>
+      </div>
     </div>
-</template>
-
-
-<script setup>
-
-</script>
-<style lang="">
-    
-</style>
+  </template>
+  
+  <script setup>
+  import { ref } from 'vue';
+  import { PhThinInstagramLogo } from '@kalimahapps/vue-icons';
+  import { PhThinFacebookLogo } from '@kalimahapps/vue-icons';
+  import { AnOutlinedPlus , AkMinus } from '@kalimahapps/vue-icons';
+  
+  // Déclare des variables réactives pour chaque section
+  const isCatalogueOpen = ref(false);
+  const isFaqOpen = ref(false);
+  const isLienUtileOpen = ref(false);
+  
+  // Fonctions pour basculer les sections
+  const toggleCatalogue = () => {
+    isCatalogueOpen.value = !isCatalogueOpen.value;
+  };
+  
+  const toggleFaq = () => {
+    isFaqOpen.value = !isFaqOpen.value;
+  };
+  
+  const toggleLienUtile = () => {
+    isLienUtileOpen.value = !isLienUtileOpen.value;
+  };
+  </script>
+  
+  <style scoped>
+  .footer {
+    background: var(--colorbgNoir);
+  }
+  
+  .footer-icon-social {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+  
+  .icon {
+    color: #ffffff;
+    font-size: 2.8125rem;
+    cursor: pointer;
+  }
+  
+  .footer-question {
+    color: var(--colorbgBlanc);
+    font-family: var(--fontFamily);
+    letter-spacing: -1px;
+    font-size: 12px;
+  }
+  
+  .footer-question p {
+    font-weight: 700;
+  }
+  .footer-question span {
+    cursor: pointer;
+    font-weight: 500;
+  }
+  
+  .footer-link-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--colorbgNoir);
+    color: var(--textcolorBlanc);
+    font-family: var(--fontFamily);
+    font-size: 12px;
+    width: 100%;
+    min-height: 40px;
+    cursor: pointer;
+  }
+  .footer-link-p {
+    text-align: center;
+    flex-grow: 1;
+    margin-left: 48px;
+  }
+  .footer-link-icon {
+    font-size: 2rem;
+    padding: 0 20px 0 0;
+    color: #ffffff;
+  }
+  
+  .footer-link-clicked {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: var(--textcolorBlanc);
+    font-family: var(--fontFamily);
+    background: var(--colorbgGray);
+    width: 100%;
+  }
+  
+  .footer-link-clicked-item {
+    width: 100%;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .footer-link-clicked-item a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  .footer-mention {
+    font-family: var(--fontFamilyMention);
+    color: var(--textcolorBlanc);
+    font-size: 12px;
+    margin: 12px 0;
+  }
+  .footer-mention-line {
+    text-align: center;
+  }
+  
+  .footer-mention-lineTwo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--fontFamilyMention);
+    color: var(--textcolorBlanc);
+    gap: 12px;
+  }
+  </style>
+  

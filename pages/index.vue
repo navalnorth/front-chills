@@ -29,7 +29,7 @@
         </TextPlayVideo>
         <br>
     </div>
-
+    <Footer/>
 </template>
 
 <style scoped>
