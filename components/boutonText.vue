@@ -8,37 +8,37 @@
 const props = defineProps({
   textColor: {
     type: String,
-    default: 'var(--text-color-light)'
+    default: ''
   },
   background: {
     type: String,
-    default: 'var(--border-none)'
+    default: ''
   },
   borderSolid: {
     type: String,
-    default: 'var(--border-none)'
+    default: ''
   }
-});
+})
 
 const buttonStyle = computed(() => ({
   color: props.textColor,
   background: props.background,
   border: `${props.borderSolid}`,
-}));
+}))
 </script>
 
 <style scoped>
 .button {
   cursor: pointer;
-  padding: 8px 16px;
+  padding: 10px 24px;
   border-radius: 4px;
   font-family: Impact;
   font-size: 16px;
-  font-weight: 300;
+  font-weight: 400;
   line-height: 20px;
   letter-spacing: 1px;
   text-align: center;
   text-transform: uppercase;
-  letter-spacing: 2.4px
+  letter-spacing: 1px
 }
 </style>
