@@ -1,8 +1,15 @@
+@font-face {
+    font-family: 'Andale';
+    font-style: normal;
+    font-weight: normal;
+    src: url('../fonts/ANDALEMO.woff');
+}
+
 :root {
     --colorbgGradientRouge: linear-gradient(180deg, #E03122 0%, #7A1B13 100%);
     --colorbgBlanc: #ffffff;
     --colorbgNoir: #000000;
-    --colorbgJaune: #D4C61B;
+    --colorbgJaune: #F2E438;
     --colorbgGradientJaune: linear-gradient(180deg, #F2E438 0%, #ADA213 100%);
     --colorbgMarin: #67C0BB;
     --colorbgMarinFonce: #4DA4A6;
@@ -12,7 +19,10 @@
     --textcolorNoir: #000000;
     --borderNone: none;
     --border2Rouge: 2px solid #E03122;
+    --fontFamilyImpact: impact;
+    --fontFamilyAndale: "Andale";
 }
+
 body {
     margin: 0;
     padding: 0;

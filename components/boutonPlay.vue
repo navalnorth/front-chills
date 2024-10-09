@@ -18,13 +18,13 @@ const props = defineProps({
         type: String,
         default: ''
     }
-});
+})
 
 const buttonStyle = computed(() => ({
     color: props.textColor,
     background: props.background,
     border: `${props.borderSolid}`,
-}));
+}))
 </script>
 
 <style scoped>
