@@ -5,8 +5,8 @@
     src: url('../fonts/ANDALEMO.woff');
 }
 
-:root {
-  @font-face {
+
+@font-face {
     font-family: 'FuturaCyrillicBold';
     src: url('@/assets/fonts/FuturaCyrillicBold.ttf') format('truetype');
     font-weight: bold;
