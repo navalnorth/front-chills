@@ -5,7 +5,6 @@
     src: url('../fonts/ANDALEMO.woff');
 }
 
-
 @font-face {
     font-family: 'FuturaCyrillicBold';
     src: url('@/assets/fonts/FuturaCyrillicBold.ttf') format('truetype');

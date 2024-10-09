@@ -5,14 +5,6 @@
 
     <NuxtPage />
 
-    <div class="div">
-      Lorem ipsum dolor sit, amet consectetur adipisicing elit. Eveniet iste quam porro sint consequuntur odit. Eaque,
-      explicabo? Minima nostrum atque officia sequi distinctio quo labore rem quasi adipisci. Alias, autem.
-      Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quos odit provident perspiciatis, maxime nihil nesciunt
-      dolor, dolore itaque error voluptas iste tempore facilis incidunt. Tempore aspernatur libero cumque ipsam
-      veritatis!
-    </div>
-
   </div>
 </template>
 
@@ -47,10 +39,5 @@ onMounted(() => {
   position: fixed;
   z-index: 10000;
   width: 100%;
-}
-.div {
-  height: 1000px;
-  width: 100%;
-  color: white;
 }
 </style>
