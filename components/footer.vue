@@ -56,18 +56,21 @@
   
       <!-- Mentions légales -->
       <div class="footer-mention">
-        <div class="footer-mention-line">Informations légales</div>
+        <div class="footer-mention-line">Informations legales</div>
         <div class="footer-mention-lineTwo">
-          <div>Mentions légales</div>
+          <div>Mentions legales</div>
           <div>|</div>
-          <div>Protection des données</div>
+          <div>Protection des donnees</div>
           <div>|</div>
           <div>Politique des cookies</div>
         </div>
         <div class="footer-mention-lineTwo">
-          <div>Conditions générales de vente</div>
+          <div>Conditions generales de vente</div>
           <div>|</div>
           <div>Conditions d'utilisation</div>
+        </div>
+        <div class="footer-mention-lineThree">
+            Tous droits reserves. Reproduction interdite.
         </div>
       </div>
     </div>
@@ -125,7 +128,7 @@
   }
   
   .footer-question p {
-    font-weight: 700;
+    font-weight: 800;
   }
   .footer-question span {
     cursor: pointer;
@@ -196,6 +199,15 @@
     font-family: var(--fontFamilyMention);
     color: var(--textcolorBlanc);
     gap: 12px;
+  }
+
+  .footer-mention-lineThree {
+    text-align: center;
+    margin-top: 12px;
+    font-family: var(--fontFamilyMention);
+    color: var(--textcolorBlanc);
+    font-size: 10px;
+
   }
   </style>
   
