@@ -29,7 +29,7 @@
             rthryjhty
         </button>
     </div>
-
+    <Footer/>
 </template>
 
 
