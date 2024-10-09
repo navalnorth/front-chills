@@ -56,7 +56,7 @@
   
       <!-- Mentions légales -->
       <div class="footer-mention">
-        <div class="footer-mention-line">Informations légales</div>
+        <div class="footer-mention-line">Informations legales</div>
         <div class="footer-mention-lineTwo">
           <div>Mentions legales</div>
           <div>|</div>
