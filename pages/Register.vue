@@ -52,7 +52,7 @@
             </div>
         </div>
 
-        <BoutonText class="buttonRegister" textColor="var(--textcolorBlanc)" background="var(--colorbgRouge)"
+        <BoutonText class="buttonRegister" textColor="var(--textcolorBlanc)" background="var(--colorbgGradientRouge)"
             borderSolid="var(--borderNone)">
             Créer un compte
         </BoutonText>

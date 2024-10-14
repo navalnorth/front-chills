@@ -1,5 +1,6 @@
 <template>
-    <h1 class="titre">CONNECTEZ-VOUS !</h1>
+    <div class="login">
+        <h1 class="titre">CONNECTEZ-VOUS !</h1>
 
     <form class="input-groupe">
         <div>
@@ -24,7 +25,7 @@
                 <p class="seSouvenir">Se souvenir de moi</p>
             </label>
         </div>
-        <BoutonText class="buttonLogin" textColor="var(--textcolorBlanc)" background="var(--colorbgRouge)"
+        <BoutonText class="buttonLogin" textColor="var(--textcolorBlanc)" background="var(--colorbgGradientRouge)"
             borderSolid="var(--borderNone)">
             Se Cnnecter
         </BoutonText>
@@ -42,6 +43,7 @@
             </BoutonText>
         </div>
     </form>
+    </div>
 </template>
 
 
@@ -67,6 +69,10 @@ const togglePassword = () => {
 
 
 <style scoped>
+.login {
+    background-color: black;
+    height: 100vh;
+}
 .titre {
     color: white;
     font-family: var(--fontFamilyImpact);
@@ -186,6 +192,7 @@ const togglePassword = () => {
     opacity: 0.7;
     font-size: 14px;
     font-family: var(--fontFamilyAndale);
+    margin-bottom: 5px;
 }
 
 .buttonLogin {

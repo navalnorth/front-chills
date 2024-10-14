@@ -1,8 +1,10 @@
 <template>
 
   <div class="bodyPadd">
+    <v-app>
     <NuxtRouteAnnouncer />
     <NuxtPage />
+  </v-app>
   </div>
 </template>
 
