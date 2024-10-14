@@ -13,7 +13,10 @@
     "@kalimahapps/vue-icons": "^1.7.1",
     "nuxt": "^3.13.0",
     "vue": "latest",
-    "vue-router": "latest"
+    "vue-draggable-next": "^2.2.1",
+    "vue-draggable-plus": "^0.5.3",
+    "vue-router": "latest",
+    "vuedraggable": "^4.1.0"
   },
   "devDependencies": {
     "@iconify-json/bi": "^1.2.0",
