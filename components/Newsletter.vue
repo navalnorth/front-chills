@@ -148,5 +148,5 @@
     margin-top: 15px;
 }
 
-/* commentaire */
+/* commentaires */
 </style>
