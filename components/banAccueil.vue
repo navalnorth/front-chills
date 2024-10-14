@@ -5,7 +5,6 @@
                 <img v-for="name in pictureName" :key="name" :src="`_nuxt/assets/img/${name}.jpg`" class="image" />
             </div>
         </div>
-
         <div class="overlay">
             <p class="textBan">
                 ENTREZ<br />SI VOUS L'OSEZ...<br /><span class="textP">LES FRISSONS SONT GARANTIS</span>
@@ -18,16 +17,13 @@
                 <div v-for="(dot, index) in pictureName" :key="index" :class="checkDotClass(index)"></div>
             </div>
         </div>
-        
-        <!-- <div class="fleches">
             <button @click="prevSlide" class="prevButton">
                 <Icon name="ep:arrow-left" size="20"/>
             </button>
             <button @click="nextSlide" class="nextButton">
                 <Icon name="hugeicons:arrow-right-01" size="20" />
             </button>
-        </div>  -->
-       
+        </div>
     </div>
 </template>
 
@@ -39,7 +35,6 @@ const pictureName = ref([ 'ban1', 'ban2', 'ban3', 'ban4', 'ban5',]);
 const currentIndex = ref(0);
 let slideInterval = null;
 
-
 const nextSlide = () => {
     currentIndex.value = (currentIndex.value + 1) % pictureName.value.length;
 };
@@ -50,8 +45,6 @@ const prevSlide = () => {
 const slide = () => {
     slideInterval = setInterval(nextSlide, 5000);
 };
-
-
 
 let startX = 0;
 let currentX = 0;
@@ -71,13 +64,9 @@ const endTouch = () => {
     }
 };
 
-
-
 const checkDotClass = (index) => {
     return index === currentIndex.value ? 'activeDot' : 'dot';
 };
-
-
 
 onMounted(() => {
     slide();
@@ -169,4 +158,5 @@ onMounted(() => {
     background-color: #D9D9D9CC;
 }
 </style>
+
 
