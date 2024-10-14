@@ -24,7 +24,6 @@
                 <Icon name="hugeicons:arrow-right-01" size="20" />
             </button>
         </div>
-    </div>
 </template>
 
 

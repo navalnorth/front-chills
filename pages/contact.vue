@@ -1,14 +1,15 @@
 <template>
-    <h1 class="titre">Contactez-nous !</h1>
+    <div class="contact">
+        <h1 class="titre">Contactez-nous !</h1>
 
     <form class="input-groupe">
         <div>
             <Icon name="ph:user-light" size="30" class="iconInput" />
             <input class="input" type="text" placeholder="Nom et Prénom">
         </div>
-        <div class="passwordInput">
+        <div>
             <Icon name="ic:outline-email" size="30" class="iconInput" />
-            <input class="input" type="text" placeholder="Indiquez votre email" ref="passwordInput" v-model="password">
+            <input class="input" type="text" placeholder="Indiquez votre email" >
         </div>
 
         <div class="inputGoupList">
@@ -39,31 +40,22 @@
         </BoutonText>
 
     </form>
+    </div>
 </template>
 
 
 
 <script setup>
-const password = ref('')
-const isPasswordVisible = ref(false)
-const passwordInput = ref(null)
-
-const togglePassword = () => {
-    isPasswordVisible.value = !isPasswordVisible.value
-
-    nextTick(() => {
-        const input = passwordInput.value
-        input.focus()
-        input.setSelectionRange(password.value.length, password.value.length)
-    })
-
-}
 
 </script>
 
 
 
 <style scoped>
+.contact {
+    background-color: black;
+    height: 100vh;
+}
 .titre {
     color: white;
     font-family: var(--fontFamilyImpact);
