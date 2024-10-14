@@ -33,7 +33,7 @@ const buttonStyle = computed(() => ({
   padding: 10px 24px;
   border-radius: 4px;
   font-family: Impact;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 400;
   line-height: 20px;
   letter-spacing: 1px;

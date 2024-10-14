@@ -1,11 +1,10 @@
 <template>
     <div class="ban">
-        <div class="slider-container">
+        <div class="slider-container" @touchstart="startTouch" @touchmove="moveTouch" @touchend="endTouch">
             <div class="slider-tracker" :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
-                <img v-for="name in pictureName" :src="`_nuxt/assets/img/${name}.jpg`" class="image">
+                <img v-for="name in pictureName" :key="name" :src="`_nuxt/assets/img/${name}.jpg`" class="image" />
             </div>
         </div>
-
         <div class="overlay">
             <p class="textBan">
                 ENTREZ<br />SI VOUS L'OSEZ...<br /><span class="textP">LES FRISSONS SONT GARANTIS</span>
@@ -15,17 +14,15 @@
                 PLONGEZ DANS LA TERREUR
             </BoutonText>
             <div class="dots">
-                <div v-for="dot, index in pictureName" :class="checkDotClass(index)"></div>
+                <div v-for="(dot, index) in pictureName" :key="index" :class="checkDotClass(index)"></div>
             </div>
         </div>
-        <div class="fleches">
             <button @click="prevSlide" class="prevButton">
                 <Icon name="ep:arrow-left" size="20"/>
             </button>
             <button @click="nextSlide" class="nextButton">
                 <Icon name="hugeicons:arrow-right-01" size="20" />
             </button>
-            
         </div>
     </div>
 </template>
@@ -33,53 +30,47 @@
 
 
 <script setup>
-const pictureName = ref([
-    'ban1',
-    'ban2',
-    'ban3',
-    'ban4',
-    'ban5',
-]);
+const pictureName = ref([ 'ban1', 'ban2', 'ban3', 'ban4', 'ban5',]);
 
 const currentIndex = ref(0);
+let slideInterval = null;
 
 const nextSlide = () => {
-    if (currentIndex.value == pictureName.value.length - 1) {
-        currentIndex.value = 0
-    } else {
-        currentIndex.value++
-    }
-}
+    currentIndex.value = (currentIndex.value + 1) % pictureName.value.length;
+};
 const prevSlide = () => {
-    if (currentIndex.value !== 0) {
-        currentIndex.value--
-    } else {
-        return
-    }
-}
+    currentIndex.value = (currentIndex.value - 1 + pictureName.value.length) % pictureName.value.length;
+};
 
 const slide = () => {
-    setInterval(() => {
-        if (currentIndex.value == pictureName.value.length - 1) {
-            currentIndex.value = 0;
-        } else {
-            currentIndex.value++;
-        }
-    }, 5000);
+    slideInterval = setInterval(nextSlide, 5000);
+};
+
+let startX = 0;
+let currentX = 0;
+
+const startTouch = (e) => {
+    startX = e.touches[0].clientX;
 }
+const moveTouch = (e) => {
+    currentX = e.touches[0].clientX;
+}
+const endTouch = () => {
+    const diff = startX - currentX;
+    if (diff > 50) {
+        nextSlide();
+    } else if (diff < -50) {
+        prevSlide();
+    }
+};
 
 const checkDotClass = (index) => {
-    if (index == currentIndex.value) {
-        return 'activeDot';
-    }
-    else {
-        return 'dot';
-    }
-}
+    return index === currentIndex.value ? 'activeDot' : 'dot';
+};
 
 onMounted(() => {
     slide();
-})
+});
 </script>
 
 
@@ -167,3 +158,5 @@ onMounted(() => {
     background-color: #D9D9D9CC;
 }
 </style>
+
+

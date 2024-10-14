@@ -1,57 +1,93 @@
 <template>
-    <div class="tout">
-        <div @click="derouler">
-            <div v-if="burger" class="iconDiv">
-                <Icon name="ic:round-menu" size="30" class="icon"/>
-            </div>
-            <div v-else>
-                <div class="iconDiv">
-                    <Icon name="material-symbols-light:close" size="30" class="icon" />
-                </div>
-                <nav class="nav">
-                    <div class="navAlignement">
-                        <NuxtLink to="/">Accueil</NuxtLink>
-                        <NuxtLink to="/Films">Films</NuxtLink>
-                        <NuxtLink to="/Series">Series</NuxtLink>
-                        <NuxtLink to="/categories">Categories</NuxtLink>
-                        <NuxtLink to="/NoreSelection">Notre Sélection</NuxtLink>
-                        <NuxtLink to="/NotreOffre">Notre Offre</NuxtLink>
+        <div class="tout" :class="[!isClosed || navbarFixed ? 'navbar-fixed' : '']"
+            :style="{ backgroundColor: `${navbarOpacity}` }">
+            <div @click="openMenu">
+                <div v-if="isClosed">
+                    <div class="iconDiv">
+                        <Icon name="ic:round-menu" size="30" class="icon" />
                     </div>
-                </nav>
+                </div>
+                <div v-else>
+                    <div class="iconDiv">
+                        <Icon name="material-symbols-light:close" size="30" class="icon" />
+                    </div>
+                    <nav class="nav">
+                        <div class="navAlignement">
+                            <NuxtLink to="/">Accueil</NuxtLink>
+                            <NuxtLink to="/Films">Films</NuxtLink>
+                            <NuxtLink to="/Series">Series</NuxtLink>
+                            <NuxtLink to="/categories">Categories</NuxtLink>
+                            <NuxtLink to="/NoreSelection">Notre Sélection</NuxtLink>
+                            <NuxtLink to="/NotreOffre">Notre Offre</NuxtLink>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+            <div class="logo">
+                <img src="/assets/img/logoLettres.png" width="85px">
+            </div>
+            <div class="navDroite">
+                <div class="iconDivSearch">
+                    <Icon name="lsicon:search-filled" size="25" class="icon" />
+                </div>
+                <div class="iconDiv">
+                    <NuxtLink to="/Login">
+                        <Icon name="mdi:account" size="30" class="icon" />
+                    </NuxtLink>
+                </div>
             </div>
         </div>
-        <div class="logo">
-            <img src="assets\img\logoLettres.png" width="85px">
-        </div>
-        <div class="navDroite">
-            <div class="iconDivSearch">
-                <Icon name="lsicon:search-filled" size="25" class="icon" />
-            </div>
-            <div class="iconDiv">
-                <Icon name="mdi:account" size="30" class="icon" />
-            </div>
-        </div>
-    </div>
 </template>
 
-
-
 <script setup>
-const burger = ref(true)
+const isClosed = ref(true)
+const navbarOpacity = ref('rgba(0,0,0,1)')
+const navbarFixed = ref(false)
 
-const derouler = () => {
-    burger.value = !burger.value
+const openMenu = () => {
+    isClosed.value = !isClosed.value
+
+    if (!isClosed.value) {
+        navbarOpacity.value = "rgba(0, 0, 0, .7)"
+        navbarFixed.value = true
+    } else {
+        navbarOpacity.value = 1
+        navbarFixed.value = false
+    }
 }
+
+const scrollEvent = (e) => {
+    const scrollTop = document.documentElement.scrollTop
+
+    if (scrollTop === 0) {
+        navbarOpacity.value = 'rgba(0,0,0,1)'
+        navbarFixed.value = false
+    } else {
+        navbarOpacity.value = "rgba(0, 0, 0, .7)"
+        navbarFixed.value = true
+    }
+}
+
+onMounted(() => {
+    window.addEventListener('scroll', scrollEvent)
+})
 </script>
-
-
 
 <style scoped>
 .tout {
     display: flex;
     justify-content: space-between;
-    background-color: #000000;
+    background-color: #000;
     padding: 15px 0;
+    position: relative;
+}
+
+.navbar-fixed {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
 }
 
 .iconDiv {
@@ -103,5 +139,4 @@ const derouler = () => {
 .navDroite {
     display: flex;
 }
-
 </style>
