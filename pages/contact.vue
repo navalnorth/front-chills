@@ -115,14 +115,17 @@ const togglePassword = () => {
     justify-content: center;
     align-items: center;
 }
+.inputGoupList select option {
+    width: 1000px;
+}
 .inputGoupList select {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
     text-align: left;
-    width: 330px;
 }
+
 .optionList {
     font-size: 18px; /* Taille de police des options */
     padding: 10px; /* Marges internes des options pour les agrandir */
