@@ -1,6 +1,7 @@
 <template>
 
     <BanAccueil />
+    <Card />
     <Footer/>
 </template>
 
