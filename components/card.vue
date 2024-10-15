@@ -3,7 +3,7 @@
       <!-- Badge d'âge en haut à gauche -->
       <div class="badge-age">
         <div class="circle">
-          <span>-{{props.imdbAge}}</span>
+          <span>{{props.imdbAge}}</span>
         </div>
       </div>
   
@@ -20,7 +20,7 @@
       <!-- Informations du film -->
       <div class="card-info">
         <p class="movie-title">{{props.imdbTitle}}</p>
-        <p class="movie-duration">{{props.imdbTime}}</p>
+        <p class="movie-duration">{{props.imdbTime}} MIN</p>
       </div>
     </div>
 </template>
@@ -42,12 +42,12 @@ imdbTitle: {
   default: 'Untitled'
 },
 imdbTime: {
-  type: [String, Number], // Accepter String ou Number
+  type: [String, Number],
   default: 'N/A'
 },
 imdbBanner: {
   type: String,
-  default: '/assets/img/ban3.jpg' // Image par défaut si aucune image n'est fournie
+  default: '/assets/img/ban3.jpg'
 }
 
 })
@@ -56,12 +56,13 @@ imdbBanner: {
 <style scoped>
 .card {
     position: relative;
-    /* min-width: 142px;
-    min-height: 233px; */
     width: 142px;
     height: 233px;
+    min-height: 233px;
+    min-width: 142px;
     overflow: hidden;
-    font-family: var(--fontFamily)
+    font-family: var(--fontFamily);
+    cursor: pointer;
   }
   
   .card-image img {
