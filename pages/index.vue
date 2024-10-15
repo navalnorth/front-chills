@@ -88,6 +88,8 @@ const fetchFilmDetails = async () => {
     }
 };
 
+console.log(horrorFilms);
+
 
 const fetchThrillerGenres = async () => {
     try {
