@@ -2,6 +2,8 @@
   <button class="button" :style="buttonStyle" >
     <slot></slot>
   </button>
+  <!-- <Icon name="icon-park-outline:right-c" size="20" /> Icone fleche-->
+  <!-- <Icon name="bi:play-btn" size="20"/> bouton ecran -->
 </template>
 
 <script setup>

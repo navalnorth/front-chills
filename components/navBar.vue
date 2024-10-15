@@ -1,42 +1,46 @@
 <template>
-        <div class="tout" :class="[!isClosed || navbarFixed ? 'navbar-fixed' : '']"
-            :style="{ backgroundColor: `${navbarOpacity}` }">
-            <div @click="openMenu">
-                <div v-if="isClosed">
-                    <div class="iconDiv">
-                        <Icon name="ic:round-menu" size="30" class="icon" />
-                    </div>
-                </div>
-                <div v-else>
-                    <div class="iconDiv">
-                        <Icon name="material-symbols-light:close" size="30" class="icon" />
-                    </div>
-                    <nav class="nav">
-                        <div class="navAlignement">
-                            <NuxtLink to="/">Accueil</NuxtLink>
-                            <NuxtLink to="/Films">Films</NuxtLink>
-                            <NuxtLink to="/Series">Series</NuxtLink>
-                            <NuxtLink to="/categories">Categories</NuxtLink>
-                            <NuxtLink to="/NoreSelection">Notre Sélection</NuxtLink>
-                            <NuxtLink to="/NotreOffre">Notre Offre</NuxtLink>
-                        </div>
-                    </nav>
-                </div>
-            </div>
-            <div class="logo">
-                <img src="/assets/img/logoLettres.png" width="85px">
-            </div>
-            <div class="navDroite">
-                <div class="iconDivSearch">
-                    <Icon name="lsicon:search-filled" size="25" class="icon" />
-                </div>
+    <div class="tout" :class="[!isClosed || navbarFixed ? 'navbar-fixed' : '']"
+        :style="{ backgroundColor: `${navbarOpacity}` }">
+        <div @click="openMenu">
+            <div v-if="isClosed">
                 <div class="iconDiv">
-                    <NuxtLink to="/Login">
-                        <Icon name="mdi:account" size="30" class="icon" />
-                    </NuxtLink>
+                        <Icon name="ic:round-menu" size="30" class="icon" />
                 </div>
+            </div>
+            <div v-else>
+                    <div>
+                        <div class="iconDiv">
+                            <Icon name="material-symbols-light:close" size="30" class="icon" />
+                        </div>
+                        <nav class="nav">
+                            <div class="navAlignement">
+                                <NuxtLink to="/">Accueil</NuxtLink>
+                                <NuxtLink to="/Films">Films</NuxtLink>
+                                <NuxtLink to="/Series">Series</NuxtLink>
+                                <NuxtLink to="/categories">Categories</NuxtLink>
+                                <NuxtLink to="/NoreSelection">Notre Sélection</NuxtLink>
+                                <NuxtLink to="/NotreOffre">Notre Offre</NuxtLink>
+                            </div>
+                        </nav>
+                    </div>
             </div>
         </div>
+        <div class="logo">
+            <NuxtLink to="/">
+            <img src="/assets/img/logoLettres.png" width="85px">
+            </NuxtLink>
+        </div>
+        <div class="navDroite">
+            <div class="iconDivSearch">
+                <Icon name="lsicon:search-filled" size="25" class="icon" />
+            </div>
+            <div class="iconDiv">
+                <NuxtLink to="/Login">
+                    <Icon name="mdi:account" size="30" class="icon" />
+                </NuxtLink>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script setup>
@@ -82,6 +86,24 @@ onMounted(() => {
     position: relative;
 }
 
+.slide-fade-enter-active,
+.slide-fade-leave-active {
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+    overflow: hidden;
+}
+
+.slide-fade-enter-from,
+.slide-fade-leave-to {
+    max-height: 0;
+    opacity: 0;
+}
+
+.slide-fade-enter-to,
+.slide-fade-leave-from {
+    max-height: 1000px;
+    opacity: 1;
+}
+
 .navbar-fixed {
     position: fixed;
     top: 0;
@@ -94,10 +116,12 @@ onMounted(() => {
     display: flex;
     padding: 3px 8px;
 }
+
 .icon {
     cursor: pointer;
     color: white;
 }
+
 .iconDivSearch {
     display: flex;
     padding: 6px 3px;
@@ -109,6 +133,7 @@ onMounted(() => {
     display: flex;
     justify-content: center;
 }
+
 .navAlignement {
     display: flex;
     align-items: flex-start;
@@ -116,6 +141,7 @@ onMounted(() => {
     width: 100%;
     max-width: 300px;
 }
+
 .navAlignement a {
     text-decoration: none;
     color: white;

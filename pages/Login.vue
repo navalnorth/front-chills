@@ -2,14 +2,14 @@
     <div class="login">
         <h1 class="titre">CONNECTEZ-VOUS !</h1>
 
-    <form class="input-groupe">
+    <form @submit.prevent="login" class="input-groupe">
         <div>
             <Icon name="ph:user-light" size="30" class="iconInput" />
-            <input class="input" type="text" placeholder="Email ou nom d'utilisateur">
+            <input class="input" type="text" placeholder="Email ou nom d'utilisateur" v-model="username">
         </div>
         <div class="passwordInput">
             <Icon name="streamline:padlock-square-1" size="30" class="iconInput" />
-            <input class="input" :type="isPasswordVisible ? 'text' : 'password'" placeholder="Mot de passe" ref="passwordInput" v-model="password">
+            <input class="input" :type="isPasswordVisible ? 'text' : 'password'" placeholder="Mot de passe" ref="passwordInput" v-model="mdp">
             <button type="button" class="iconMdp" @click="togglePassword">
                 <Icon :name="isPasswordVisible ? 'mdi-light:eye' : 'mdi-light:eye-off'"  size="30"/>
             </button>
@@ -37,8 +37,9 @@
 
         <div>
             <p class="textRegister">Vous n'avez pas de compte ?</p>
-            <BoutonText class="boutonRegister" textColor="var(--textcolorBlanc)" background="var(--colorbgNoir)"
-                borderSolid="var(--borderRouge)">
+            <BoutonText 
+                @click="login"
+                class="boutonRegister" textColor="var(--textcolorBlanc)" background="var(--colorbgNoir)" borderSolid="var(--borderRouge)">
                 <NuxtLink to="/Register">Créer un compte</NuxtLink>
             </BoutonText>
         </div>
@@ -49,7 +50,10 @@
 
 
 <script setup>
-const password = ref('')
+const router = useRouter()
+
+const username = ref('admin')
+const mdp = ref('User123456789*')
 const isPasswordVisible = ref(false)
 const passwordInput = ref(null)
 
@@ -59,11 +63,29 @@ const togglePassword = () => {
     nextTick(() => {
         const input = passwordInput.value
         input.focus()
-        input.setSelectionRange(password.value.length, password.value.length)
+        input.setSelectionRange(mdp.value.length, mdp.value.length)
     })
     
 }
 
+
+const login = async () => {
+  try {
+    const body = {
+      username: username.value,
+      mdp: mdp.value,
+    }
+
+    const data = await $fetch('http://localhost:3001/api/users/login', {
+      method: 'POST',
+      body,
+    })
+
+    router.push('/2fa')
+  } catch (error) {
+    console.error('Erreur lors de la connexion:', error)
+  }
+}
 </script>
 
 
@@ -79,6 +101,7 @@ const togglePassword = () => {
     text-align: center;
     font-weight: 100;
     margin-top: 70px;
+    margin-bottom: 20px;
 }
 
 .input-groupe {
@@ -234,3 +257,33 @@ const togglePassword = () => {
     color: inherit;
 }
 </style>
+
+
+
+
+// const login = async () => {
+    //     try {
+    //         const body = {
+    //             username: username.value,
+    //             mdp: mdp.value
+    //         }
+    //         const response = await fetch('/api/login', {
+    //             method: 'POST',
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             },
+    //             body: JSON.stringify(body)
+    //         })
+    
+    //         if (!response.ok) {
+    //             throw new Error ('Login échoué')
+    //         }
+    
+    //         const data = await response.json()
+    
+    //         router.push('/2fa')
+    
+    //     } catch (error) {
+    //         console.error("Erreur lors de la connexion: ", error)
+    //     }
+    // }

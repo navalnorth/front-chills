@@ -2,20 +2,24 @@
     <div class="fa2">
         <h1 class="titre">Merci de vérifier votre adresse email</h1>
     
-        <form class="input-groupe">
+        <form @submit.prevent="fa2" class="input-groupe">
             <p class="textRenvoyer">
-                Nous avons envoyé un email à {email}, merci de saisir le code reçu
+                Nous avons envoyé un email, merci de saisir le code reçu
                 ci-dessous
             </p>
-    
+            <br>
+            <div>
+                <Icon name="ph:user-light" size="30" class="iconInput" />
+                <input class="input" type="text" placeholder="Email ou nom d'utilisateur" v-model="username">
+            </div>
             <div class="otpinput">
                 <p class="textInput">Entrez votre code</p>
-                <v-otp-input class="custom-otp-input" model-value="------" focus-all focused color="white">
+                <v-otp-input class="custom-otp-input" focus-all focused color="white" v-model="code">
                 </v-otp-input>
             </div>
 
-            <BoutonText class="buttonLogin" textColor="var(--textcolorBlanc)" background="var(--colorbgGradientRouge)"
-                borderSolid="var(--borderNone)">
+            <BoutonText class="buttonLogin" @click="fa2"
+                textColor="var(--textcolorBlanc)" background="var(--colorbgGradientRouge)" borderSolid="var(--borderNone)">
                 Créer un compte
             </BoutonText>
     
@@ -26,7 +30,41 @@
 </template>
 
 <script setup>
+const router = useRouter()
+const code = ref('')
+const username = ref('')
+
+
+const fa2 = async () => {
+    try {
+        const body = {
+            username: username.value,
+            code: code.value
+        };
+        const token = localStorage.getItem('jwtToken');
+
+        const data = await $fetch('http://localhost:3001/api/users/verify-2fa', {
+            method: 'POST',
+            body,
+            headers: { Authorization: `Bearer ${token}` }
+        });
+
+        if (data && data.token) {
+            localStorage.setItem('jwtToken', data.token);
+            router.push('/')
+        } else {
+            console.error('Token non reçu après authentification', data);
+        }
+    } catch (error) {
+        console.error('Erreur lors de la connexion', error);
+    }
+};
+
+
+
 </script>
+
+
 
 <style scoped>
 .fa2 {
@@ -87,5 +125,34 @@
     font-family: var(--fontFamilyAndale);
     text-decoration: underline;
     margin: 0;
+}
+
+.input {
+    width: 300px;
+    padding: 16px 14px;
+    margin-bottom: 10px;
+    border: 1px solid white;
+    background-color: black;
+    border-radius: 4px;
+    color: white;
+    font-family: var(--fontFamilyAndale);
+    text-align: center;
+}
+.input:focus {
+    outline: 1px solid white;
+}
+.input::placeholder {
+    text-align: center;
+    font-family: var(--fontFamilyAndale);
+    color: white;
+    opacity: 0.6;
+    font-size: 13px;
+}
+.iconInput {
+    color: white;
+    opacity: 0.6;
+    position: absolute;
+    margin-left: 10px;
+    margin-top: 8px;
 }
 </style>
