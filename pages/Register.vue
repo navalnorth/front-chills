@@ -1,5 +1,6 @@
 <template>
-    <h1 class="titre">Créez votre compte !</h1>
+    <div class="register">
+        <h1 class="titre">Créez votre compte !</h1>
 
     <form class="input-groupe">
         <label class="userInput">
@@ -65,6 +66,7 @@
             </BoutonText>
         </div>
     </form>
+    </div>
 </template>
 
 
@@ -103,6 +105,10 @@ const togglePasswordConfirmation = () => {
 
 
 <style scoped>
+.register {
+    background-color: black;
+    height: 100vh;
+}
 .titre {
     color: white;
     font-family: var(--fontFamilyImpact);
