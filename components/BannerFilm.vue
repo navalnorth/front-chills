@@ -1,17 +1,26 @@
 <template>
     <div class="grid-container">
-        <div class="item item1"><Card /></div>
-        <div class="item item2">
-            <div class="item2-title">
-                <p>TITRE DE FILM \/</p>
+        <div class="item item1">
+            <Card  v-if="film"
+                :imdbTitle="film.title" 
+                :imdbTime="film.movie_length" 
+                :imdbBanner="film.banner" 
+                :imdbRating="film.rating"
+                :imdbAge="-16"/>
             </div>
-            <div class="item2-info">
-                <p>Durée <span> | </span>Réalisateur</p>
+            <div v-if="film">
+                <div class="item item2">
+                    <div class="item2-title">
+                        <p>{{ film.title }} \/</p>
+                    </div>
+                    <div class="item2-info">
+                        <p>{{ film.movie_length }} MIN <span> | </span>Réalisateur</p>
+                    </div>
+                    <div class="item2-desc">
+                        <p> {{ film.description }}</p>
+                    </div>
+                </div>
             </div>
-            <div class="item2-desc">
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda eveniet distinctio commodi nobis ad maiores omnis explicabo mollitia! Odio, repellendus. Dolor, numquam eos accusamus ea nihil non nisi nulla consequatur adipisci dignissimos tempora, esse beatae magni animi illum sit eius dolorem? Incidunt odio sequi, magnam maxime placeat nihil quaerat similique.</p>
-            </div>
-        </div>
         <div class="item item3">
             <BoutonText class="bouton" textColor="var(--textcolorBlanc)" background="var(--colorbgNoir)" borderSolid="var(--borderRouge)">
                 BANDE ANNONCE
@@ -27,6 +36,22 @@
 
 <script setup>
 
+const film = ref(null);
+
+const fetchRecommendedFilm = async () => { 
+    try {
+        const response = await fetch('http://localhost:3001/api/search/film/idFilm/tt1029234');
+        if (!response.ok) throw new Error('Erreur lors de la récupération du film');
+        const data = await response.json();
+        film.value = data.results; 
+        console.log('COUCOU', data);
+        
+    } catch (error) {
+        console.error('Erreur lors de la récupération des données:', error);
+    }
+};
+
+await fetchRecommendedFilm();
 
 </script>
 

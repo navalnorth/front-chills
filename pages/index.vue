@@ -1,14 +1,14 @@
 <template>
-    <NavBar />
+    <TestBar />
     <BanAccueil />
     <Subtitle title="LES DERNIERES FRAYEURS" :showImage="true" />
     <div class="card-container">
-        <Card 
-            v-for="(film, index) in horrorFilms" 
-            :key="film.imdb_id" 
-            :imdbTitle="film.title" 
-            :imdbTime="film.movie_length" 
-            :imdbBanner="film.banner" 
+        <Card
+            v-for="(film, index) in horrorFilms"
+            :key="film.imdb_id"
+            :imdbTitle="film.title"
+            :imdbTime="film.movie_length"
+            :imdbBanner="film.banner"
             :imdbRating="film.rating"
             :imdbAge="-16"
         />
@@ -159,6 +159,5 @@ await fetchCultesFilmDetails();
     gap: 16px; 
     padding: 10px; 
     background-color: black;
-    
 }
 </style>

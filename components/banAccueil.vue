@@ -80,6 +80,7 @@ onMounted(() => {
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    background: var(--colorbgNoir);
 }
 
 .slider-container {
