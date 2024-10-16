@@ -88,8 +88,6 @@ const fetchFilmDetails = async () => {
     }
 };
 
-console.log(horrorFilms);
-
 
 const fetchThrillerGenres = async () => {
     try {
@@ -161,6 +159,6 @@ await fetchCultesFilmDetails();
     gap: 16px; 
     padding: 10px; 
     background-color: black;
-
+    
 }
 </style>

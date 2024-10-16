@@ -26,7 +26,6 @@
 </template>
 
 <script setup>
-import BoutonPlayVideo from './BoutonPlayVideo.vue';
 
 
 </script>

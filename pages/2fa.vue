@@ -41,17 +41,17 @@ const fa2 = async () => {
             username: username.value,
             code: code.value
         };
-        const token = localStorage.getItem('jwtToken');
+        const token = localStorage.getItem('token')
 
         const data = await $fetch('http://localhost:3001/api/users/verify-2fa', {
             method: 'POST',
             body,
             headers: { Authorization: `Bearer ${token}` }
         });
-
+        console.log(data);
         if (data && data.token) {
             localStorage.setItem('jwtToken', data.token);
-            router.push('/')
+            router.push(`/profil/${data.userId}`)
         } else {
             console.error('Token non reçu après authentification', data);
         }

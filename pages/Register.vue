@@ -123,6 +123,7 @@ const togglePasswordConfirmation = () => {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    background-color: black;
 }
 .userInput {
     display: flex;
