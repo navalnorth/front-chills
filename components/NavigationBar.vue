@@ -190,7 +190,15 @@ const fetchFilmByTitle = async (title) => {
 </script>
 
 <style scoped>
+.v-enter-active,
+.v-leave-active {
+  background-color: #000;
+}
 
+.v-enter-from,
+.v-leave-to {
+  background-color: #000;
+}
 .tout {
     display: flex;
     justify-content: space-between;
