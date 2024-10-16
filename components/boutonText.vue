@@ -41,6 +41,6 @@ const buttonStyle = computed(() => ({
   letter-spacing: 1px;
   text-align: center;
   text-transform: uppercase;
-  letter-spacing: 1px
+  letter-spacing: 1px;
 }
 </style>

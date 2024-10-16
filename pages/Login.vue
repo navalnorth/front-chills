@@ -119,22 +119,9 @@ const login = async () => {
     margin-top: 8px;
 }
 
-.passwordInput {
-    position: relative;
-}
-.iconMdp {
-    position: absolute;
-    color: white;
-    background: none;
-    border: none;
-    opacity: .6;
-    right: 5px;
-    margin-top: 8px;
-}
-
 .input {
     width: 300px;
-    padding: 16px 14px;
+    padding: 12px 14px;
     margin-bottom: 10px;
     border: 1px solid white;
     background-color: black;
@@ -152,6 +139,19 @@ const login = async () => {
     color: white;
     opacity: 0.6;
     font-size: 13px;
+}
+
+.passwordInput {
+    position: relative;
+}
+.iconMdp {
+    position: absolute;
+    color: white;
+    background: none;
+    border: none;
+    opacity: .6;
+    right: 5px;
+    margin-top: 8px;
 }
 
 .mdp a {

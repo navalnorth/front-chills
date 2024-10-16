@@ -83,7 +83,6 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
 import { PhThinInstagramLogo } from '@kalimahapps/vue-icons';
 import { PhThinFacebookLogo } from '@kalimahapps/vue-icons';
 import { AnOutlinedPlus , AkMinus } from '@kalimahapps/vue-icons';
