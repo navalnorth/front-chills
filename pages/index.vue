@@ -1,5 +1,5 @@
 <template>
-    <TestBar />
+    <NavigationBar />
     <BanAccueil />
     <Subtitle title="LES DERNIERES FRAYEURS" :showImage="true" />
     <div class="card-container">
@@ -53,11 +53,14 @@
     <Arm/>
     <Subtitle title="A DECOUVRIR SUR CHILLS" :showImage="true" :centeredTitle="true" />
     <BannerFilm />
+    <Catalogue :rows="3" :cols="2" :thirdRowShow="true" />
     <Newsletter />
     <Footer />
 </template>
 
 <script setup>
+import NavigationBar from '~/components/NavigationBar.vue';
+
 
 const horrors = ref([]);
 const horrorFilms = ref([]);
