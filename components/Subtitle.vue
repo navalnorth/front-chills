@@ -1,6 +1,6 @@
 <template>
     <div class="subtitle" :style="backgroundStyle">
-        <p :style="pStyle">
+        <p>
             {{ props.title }}
         </p>
     </div>

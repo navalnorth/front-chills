@@ -17,16 +17,19 @@
 
             <div class="passwordInput">
                 <Icon name="streamline:padlock-square-1" size="30" class="iconInput" />
-                <input class="input" :type="isPasswordVisible ? 'text' : 'password'" ref="passwordInput" v-model="oldMdp" placeholder="ancien mot de passe">
+                <input class="input" :type="isPasswordVisible ? 'text' : 'password'" ref="oldPasswordInput"
+                    v-model="oldMdp" placeholder="Ancien mot de passe">
                 <button type="button" class="iconMdp" @click="togglePassword">
                     <Icon :name="isPasswordVisible ? 'mdi-light:eye' : 'mdi-light:eye-off'" size="30" />
                 </button>
             </div>
             <div class="passwordInput">
                 <Icon name="streamline:padlock-square-1" size="30" class="iconInput" />
-                <input class="input" :type="isPasswordVisible ? 'text' : 'password'" ref="passwordInput" v-model="newMdp" placeholder="Nouveau mot de passe">
-                <button type="button" class="iconMdp" @click="togglePassword">
-                    <Icon :name="isPasswordVisible ? 'mdi-light:eye' : 'mdi-light:eye-off'" size="30" />
+                <input class="input" :type="isPasswordVisibleNew ? 'text' : 'password'"
+                    placeholder="Nouveau mot de passe" ref="newPasswordInput"
+                    v-model="newMdp">
+                <button type="button" class="iconMdp" @click="togglePasswordNew">
+                    <Icon :name="isPasswordVisibleNew ? 'mdi-light:eye' : 'mdi-light:eye-off'" size="30" />
                 </button>
             </div>
 
@@ -38,21 +41,21 @@
                 </label>
             </div>
 
-            <BoutonText class="modifierInfos" textColor="var(--textcolorBlanc)" background="var(--colorbgNoir)"
+            <!-- <BoutonText class="modifierInfos" textColor="var(--textcolorBlanc)" background="var(--colorbgNoir)"
                 borderSolid="var(--borderRouge)">
                 <NuxtLink to="/Login">Modifier les informations</NuxtLink>
                 <Icon name="mdi:pencil-circle-outline" size="30" class="iconBouton"/>
-            </BoutonText>
+            </BoutonText> -->
 
-            <BoutonText class="sauvegarder" textColor="var(--textcolorBlanc)"
-                background="var(--colorbgGradientRouge)" borderSolid="var(--borderNone)" @click="saveChanges">
+            <BoutonText class="sauvegarder" textColor="var(--textcolorBlanc)" background="var(--colorbgGradientRouge)"
+                borderSolid="var(--borderNone)" @click="saveChanges">
                 Sauvegarder
             </BoutonText>
 
             <BoutonText class="modifierInfos" textColor="var(--textcolorBlanc)" background="var(--colorbgNoir)"
                 borderSolid="var(--borderRouge)" @click="deleteCompte(route.params.id)">
-                <NuxtLink to="/Login">Supprimer mon compte</NuxtLink>
-                <Icon name="zondicons:close-outline" size="25" class="iconBouton"/>
+                Supprimer mon compte
+                <Icon name="zondicons:close-outline" size="25" class="iconBouton" />
             </BoutonText>
 
         </form>
@@ -62,13 +65,15 @@
 
 <script setup>
 const route = useRoute()
+const router = useRouter()
 
 const username = ref('')
 const email = ref('')
+
 const oldMdp = ref('')
 const newMdp = ref('')
-
 const isPasswordVisible = ref(false)
+const isPasswordVisibleNew = ref(false)
 const oldPasswordInput = ref(null)
 const newPasswordInput = ref(null)
 
@@ -76,46 +81,63 @@ const togglePassword = () => {
     isPasswordVisible.value = !isPasswordVisible.value
 
     nextTick(() => {
-        const input = oldPasswordInput.value || newPasswordInput.value
-        input.focus()
-        input.setSelectionRange(mdp.value.length, mdp.value.length)
+        const input = oldPasswordInput.value
+        if (input) {
+            input.focus()
+            input.setSelectionRange(oldMdp.value.length, oldMdp.value.length)
+        }
+    })
+
+}
+const togglePasswordNew = () => {
+    isPasswordVisibleNew.value = !isPasswordVisibleNew.value
+
+    nextTick(() => {
+        const input = newPasswordInput.value
+        if (input) {
+            input.focus()
+            input.setSelectionRange(newMdp.value.length, newMdp.value.length)
+        }
     })
 
 }
 
 
 
-const saveChanges = async () => {
+const fetchUserProfile = async (userId) => {
+    try {
+        const data = await $fetch(`http://localhost:3001/api/users/profile/${userId}`, {
+            method: 'GET'
+        })
+        username.value = data.username
+        email.value = data.email
+
+    } catch (error) {
+        console.error('Erreur lors de la récupération du profil :', error)
+    }
+}
+
+
+
+const modifyProfil = async () => {
     const userId = route.params.id
     try {
         const data = await $fetch(`http://localhost:3001/api/users/profile/${userId}`, {
             method: 'PUT',
             body: { username: username.value, email: email.value }
         })
-        
+
     } catch (error) {
         console.error('Erreur lors de la modification du profil :', error)
     }
 }
 
 
-// const modifyMdp = async (userId) => {
-//     try {
-//         const data = await $fetch(`http://localhost:3001/api/users/profile/mdp/${userId}`, {
-//         method: 'PUT'
-//     })
-//     } catch (error) {
-//         console.error('Erreur lors de la modifivation du profil :', error)
-//     }
-// }
-
-
-
-const deleteCompte = async (userId) => {
+const modifyMdp = async (userId) => {
     try {
-        const data = await $fetch(`http://localhost:3001/api/users/profile/supprimerCompte/${userId}`, {
-        method: 'DELETE'
-    })
+        const data = await $fetch(`http://localhost:3001/api/users/profile/mdp/${userId}`, {
+            method: 'PUT'
+        })
     } catch (error) {
         console.error('Erreur lors de la modifivation du profil :', error)
     }
@@ -123,26 +145,38 @@ const deleteCompte = async (userId) => {
 
 
 
-const fetchUserProfile = async (userId) => {
-  try {
-    const data = await $fetch(`http://localhost:3001/api/users/profile/${userId}`, {
-      method: 'GET'
-    })
-    username.value = data.username
-    email.value = data.email
-
-  } catch (error) {
-    console.error('Erreur lors de la récupération du profil :', error)
-  }
+const deleteCompte = async (userId) => {
+    try {
+        const data = await $fetch(`http://localhost:3001/api/users/profile/supprimerCompte/${userId}`, {
+            method: 'DELETE'
+        })
+        router.push('/')
+    } catch (error) {
+        console.error('Erreur lors de la modifivation du profil :', error)
+    }
 }
 
-onMounted(() => {
-  const userId = route.params.id
-  if (userId) {
-    fetchUserProfile(userId)
-  }
-})
 
+
+const saveChanges = async () => {
+    const userId = route.params.id
+    try {
+        await modifyProfil()
+        await modifyMdp(userId);
+        location.reload()
+    } catch (error) {
+        console.error('Erreur lors de la sauvegarde et de la modification du mot de passe :', error);
+    }
+}
+
+
+
+onMounted(() => {
+    const userId = route.params.id
+    if (userId) {
+        fetchUserProfile(userId)
+    }
+})
 </script>
 
 
@@ -283,6 +317,7 @@ onMounted(() => {
     height: 47px;
     margin-bottom: 10px
 }
+
 .modifierInfos a {
     text-decoration: none;
     color: inherit;

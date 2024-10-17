@@ -1,7 +1,7 @@
 <template>
-
-    <NavigationBar />
-    <BanAccueil/>
+    <div class="tout">
+        <NavigationBar />
+    <BanAccueil />
     <Subtitle title="LES DERNIERES FRAYEURS" :showImage="true" />
     <div class="card-container">
         <Card
@@ -10,8 +10,8 @@
             :imdbTitle="film.title"
             :imdbTime="film.movie_length"
             :imdbBanner="film.banner"
-            :imdbRating="film.rating"
-            :imdbAge="-16"
+            :imdbRating="String(film.rating)"
+            :imdbAge="String(-16)"
         />
     </div>
     <Subtitle title="VOS FAVORIS" :showImage="false" />
@@ -22,8 +22,8 @@
             :imdbTitle="film.title" 
             :imdbTime="film.movie_length" 
             :imdbBanner="film.banner" 
-            :imdbRating="film.rating"
-            :imdbAge="-16"
+            :imdbRating="String(film.rating)"
+            :imdbAge="String(-16)"
         />
     </div>
     <Subtitle title="NOS FILMS CULTES" :showImage="false" />
@@ -34,8 +34,8 @@
             :imdbTitle="film.title" 
             :imdbTime="film.movie_length" 
             :imdbBanner="film.banner" 
-            :imdbRating="film.rating"
-            :imdbAge="-16"
+            :imdbRating="String(film.rating)"
+            :imdbAge="String(-16)"
         />
     </div>
     <Subtitle title="NOS MEILLEURS THRILLER" :showImage="false" />
@@ -46,8 +46,8 @@
             :imdbTitle="film.title" 
             :imdbTime="film.movie_length" 
             :imdbBanner="film.banner" 
-            :imdbRating="film.rating"
-            :imdbAge="-16"
+            :imdbRating="String(film.rating)"
+            :imdbAge="String(-16)"
         />
     </div>
     <Banner />
@@ -57,6 +57,7 @@
     <Catalogue :rows="3" :cols="2" :thirdRowShow="true" text="PLUS DE 10000 FILMS"/>
     <Newsletter />
     <Footer />
+    </div>
 </template>
 
 <script setup>
@@ -145,7 +146,6 @@ const fetchCultesFilmDetails = async () => {
     }
 };
 
-
 await fetchHorrorGenres();
 await fetchFilmDetails();
 await fetchThrillerGenres();
@@ -157,6 +157,9 @@ await fetchCultesFilmDetails();
 </script>
 
 <style scoped>
+.tout {
+    background-color: black;
+}
 .card-container {
     display: flex; 
     overflow-x: auto;

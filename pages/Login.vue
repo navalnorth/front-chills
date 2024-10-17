@@ -26,8 +26,8 @@
             </label>
         </div>
         <BoutonText class="buttonLogin" textColor="var(--textcolorBlanc)" background="var(--colorbgGradientRouge)"
-            borderSolid="var(--borderNone)">
-            Se Cnnecter
+            borderSolid="var(--borderNone)" @click="login">
+            Se Connecter
         </BoutonText>
 
         <div class="connectGoogle">
@@ -38,7 +38,6 @@
         <div>
             <p class="textRegister">Vous n'avez pas de compte ?</p>
             <BoutonText 
-                @click="login"
                 class="boutonRegister" textColor="var(--textcolorBlanc)" background="var(--colorbgNoir)" borderSolid="var(--borderRouge)">
                 <NuxtLink to="/Register">Créer un compte</NuxtLink>
             </BoutonText>
@@ -53,7 +52,7 @@
 const router = useRouter()
 
 const username = ref('admin')
-const mdp = ref('User123456789*')
+const mdp = ref('Admin123456789*')
 const isPasswordVisible = ref(false)
 const passwordInput = ref(null)
 
@@ -219,7 +218,7 @@ const login = async () => {
 }
 
 .buttonLogin {
-    width: 330px;
+    width: 300px;
     height: 60px;
     font-family: var(--fontFamilyImpact);
 }
