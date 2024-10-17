@@ -54,12 +54,15 @@
     <Arm/>
     <Subtitle title="A DECOUVRIR SUR CHILLS" :showImage="true" :centeredTitle="true" />
     <BannerFilm />
+    <Catalogue :rows="3" :cols="2" :thirdRowShow="true" />
     <Newsletter />
     <Footer />
     </div>
 </template>
 
 <script setup>
+import NavigationBar from '~/components/NavigationBar.vue';
+
 
 const horrors = ref([]);
 const horrorFilms = ref([]);

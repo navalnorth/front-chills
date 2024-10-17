@@ -41,8 +41,8 @@
       </div>
     </div>
   
-    <transition name="slide-fade">
-        <div v-if="isSearchVisible" class="search-container">
+    <div :class="isSearchVisible ? 'transition transitionActive' : 'transition'">
+        <div class="search-container">
           <h1>Rechercher</h1>
           <div class="search-bar">
             <div class="iconDivBar">
@@ -94,7 +94,7 @@
             </div>
           </div>
         </div>
-      </transition>
+      </div>
   </template>
   
 <script setup>
@@ -190,7 +190,15 @@ const fetchFilmByTitle = async (title) => {
 </script>
 
 <style scoped>
+.v-enter-active,
+.v-leave-active {
+  background-color: #000;
+}
 
+.v-enter-from,
+.v-leave-to {
+  background-color: #000;
+}
 .tout {
     display: flex;
     justify-content: space-between;
@@ -201,18 +209,24 @@ const fetchFilmByTitle = async (title) => {
 
 .slide-fade-enter-active,
 .slide-fade-leave-active {
+  background-color: #000;
+
     transition: max-height 0.5s ease, opacity 0.5s ease;
     overflow: hidden;
 }
 
 .slide-fade-enter-from,
 .slide-fade-leave-to {
+  background-color: #000;
+
     max-height: 0;
     opacity: 0;
 }
 
 .slide-fade-enter-to,
 .slide-fade-leave-from {
+  background-color: #000;
+
     max-height: 1000px;
     opacity: 1;
 }
@@ -374,5 +388,12 @@ const fetchFilmByTitle = async (title) => {
     margin-bottom: 8px;
 }
 
+.transition {
+  height: 0px;
+  transition: .3s;
+}
 
+.transitionActive {
+  height: 87px;
+}
 </style>
