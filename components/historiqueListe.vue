@@ -6,8 +6,8 @@
           :imdbTitle="film.title" 
           :imdbTime="film.movie_length" 
           :imdbBanner="film.banner" 
-          :imdbRating="film.rating"
-          :imdbAge="-16"
+          :imdbRating="String(film.rating)"
+          :imdbAge="String(-16)"
       />
   </div>
 </template>

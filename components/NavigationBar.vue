@@ -369,18 +369,6 @@ const fetchFilmByTitle = async (title) => {
     font-size: 12px;
 
 }
-.film-lenght{
-
-}
-.film-gen{
-
-}
-.film-year{
-
-}
-.film-classification {
-
-}
 
 .boutonShow {
     margin-bottom: 8px;
