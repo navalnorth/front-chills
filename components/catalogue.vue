@@ -1,7 +1,7 @@
 <template>
     <div class="catalogue">
         <div class="title">
-            <div>PLUS DE 10000 FILMS</div>
+            <div>{{ text }}</div>
         </div>
         <div class="grid-container" :style="gridStyle">
             <!-- Première et deuxième ligne -->
@@ -31,6 +31,10 @@ const props = defineProps({
     thirdRowShow: {
         type: Boolean,
         default: false 
+    },
+    text: {
+        type: String,
+        defaut: 'N/A'
     }
 })
 

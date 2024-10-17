@@ -1,4 +1,5 @@
 <template>
+    <div class="test">
     <div class="ban">
         <div class="slider-container" @touchstart="startTouch" @touchmove="moveTouch" @touchend="endTouch">
             <div class="slider-tracker" :style="{ transform: `translateX(-${currentIndex * 100}%)` }">
@@ -24,6 +25,7 @@
                 <Icon name="hugeicons:arrow-right-01" size="20" />
             </button>
         </div>
+    </div>
 </template>
 
 
@@ -75,6 +77,9 @@ onMounted(() => {
 
 
 <style scoped>
+.test {
+    z-index: 0;
+}
 .ban {
     position: relative;
     display: flex;

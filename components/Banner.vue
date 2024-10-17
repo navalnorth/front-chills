@@ -21,27 +21,27 @@
 <style scoped>
 .banner {
     display: flex;
-    justify-content: center; /* Centre le contenu */
+    justify-content: center; 
     background-color: var(--colorbgNoir);
     max-height: 200px;
     height: 200px;
     width: 100%; 
-    position: relative; /* Pour permettre aux éléments enfants de se positionner relativement */
+    position: relative; 
 }
 
 .image-container {
     position: absolute;
-    width: 50%; /* Modifiez ceci pour la largeur souhaitée de l'image */
+    width: 50%; 
     height: 100%;
     top: 0;
-    right: -25%; /* Positionne le conteneur à 50% du conteneur parent */
-    transform: translateX(-50%); /* Centre l'arête gauche de l'image */
+    right: -25%; 
+    transform: translateX(-50%); 
 }
 
 .image-container img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Pour conserver le ratio de l'image */
+    object-fit: cover;
    
 }
 .text-content {

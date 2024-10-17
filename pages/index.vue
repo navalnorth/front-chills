@@ -54,7 +54,7 @@
     <Arm/>
     <Subtitle title="A DECOUVRIR SUR CHILLS" :showImage="true" :centeredTitle="true" />
     <BannerFilm />
-    <Catalogue :rows="3" :cols="2" :thirdRowShow="true" />
+    <Catalogue :rows="3" :cols="2" :thirdRowShow="true" text="PLUS DE 10000 FILMS"/>
     <Newsletter />
     <Footer />
     </div>
