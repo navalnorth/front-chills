@@ -19,9 +19,17 @@
                             Voir Film
                         </BoutonText>
                         <BoutonText class="boutonTrailer" textColor="var(--textcolorBlanc)"
-                            background="var(--colorbgNoir)" borderSolid="var(--borderRouge)">
-                            <NuxtLink to="/Register">Bande anonce</NuxtLink>
+                            background="var(--colorbgTransparent)" borderSolid="var(--borderRouge)" @click="toggleShow">
+                            Bande anonce
                         </BoutonText>
+                    </div>
+                </div>
+                <div v-if="!isVisible">
+                    <div class="video">
+                        <iframe width="330" height="200" :src="selectedFilm.trailer" frameborder="0"
+                            allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen>
+                        </iframe>
                     </div>
                 </div>
                 <div class="divDescription">
@@ -29,6 +37,22 @@
                         {{ selectedFilm.description }}
                     </p>
                 </div>
+                    <div @click="toggleActeur">
+                    <div class="buttonCasting">
+                        <Icon name="icon-park-outline:movie" size="15" class="iconInput" />
+                        <p>CASTING +</p>
+                    </div>
+                    </div>
+                    <div v-if="!isVsibleActeur">
+                        <ul class="displayCasting">
+                            <li  v-for="acteur in ActeursFilm" :key="acteur.name">
+                                <div class="divImageCasting">
+                                    <img class="imageCasting" :src="acteur.image" />
+                                </div>
+                                <p class="nameCasting">{{ acteur.name }}</p>
+                            </li>
+                        </ul>
+                    </div>
             </div>
             <div v-else>
                 <div class="chargement">
@@ -56,7 +80,35 @@
 const route = useRoute()
 const horrors = ref([]);
 const horrorFilms = ref([]);
+const ActeursFilm = ref([]);
 const selectedFilm = ref(null);
+const isVisible = ref(true)
+const isVsibleActeur = ref(true)
+
+
+const toggleShow = () => {
+    isVisible.value = !isVisible.value
+}
+
+const toggleActeur = () => {
+    isVsibleActeur.value = !isVsibleActeur.value
+}
+
+
+const fetchActor = async () => {
+    try {
+        const response = await fetch(`http://localhost:3001/api/search/castByMovie/${route.params.id}`);
+        const data = await response.json();
+
+        const sixActeurs = data.cast.slice(0, 6)
+
+
+        ActeursFilm.value = sixActeurs
+        
+    } catch (error) {
+        console.error(`Erreur lors de la récupération des acteurs avec l'ID ${route.params.id}:`, error);
+    }
+}
 
 const fetchFilm = async () => {
     try {
@@ -82,7 +134,7 @@ const fetchHorrorGenres = async () => {
 const fetchFilmDetails = async () => {
     const filmPromises = horrors.value.map(film =>
         fetch(`http://localhost:3001/api/search/film/idFilm/${film.imdb_id}`).then(res => res.json())
-    );
+    )
 
     try {
         const filmResponses = await Promise.all(filmPromises);
@@ -95,6 +147,7 @@ const fetchFilmDetails = async () => {
 
 onMounted(async () => {
     await fetchFilm();
+    await fetchActor()
     await fetchHorrorGenres();
     await fetchFilmDetails();
 });
@@ -130,6 +183,7 @@ onMounted(async () => {
     height: 70vh;
     width: 100%;
 }
+
 .banniere {
     height: 100%;
     width: 100%;
@@ -143,6 +197,7 @@ onMounted(async () => {
     width: 100%;
     height: 100px
 }
+
 .rating {
     position: absolute;
     bottom: 0;
@@ -259,5 +314,45 @@ onMounted(async () => {
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.video {
+    margin-top: 20px;
+}
+
+.displayCasting {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+}
+.divImageCasting {
+    height: 10vh;
+    width: 100%;
+}
+.imageCasting {
+    width: 60px;
+    overflow: hidden;
+    height: 20px;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.nameCasting {
+    font-size: 9px;
+}
+
+.buttonCasting {
+   display: flex;
+   justify-content: flex-end;
+   margin-right: 40px;
+   margin-bottom: 10px;
+}
+
+.iconInput {
+    margin-top: 5px;
+    margin-right: 5px;
 }
 </style>
