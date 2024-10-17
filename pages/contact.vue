@@ -14,18 +14,19 @@
 
         <div class="inputGoupList">
            <div class="divLabel">
-            <label for="pet-select" class="labelListe">Vous nous contactez pour:</label>
+            <label class="labelListe">Vous nous contactez pour:</label>
            </div>
-            <select name="pets" id="pet-select" class="inputListe">
+            <select class="inputListe">
                 <option class="optionList">Choisir la raison</option>
-                <option class="optionList">Dog</option>
-                <option class="optionList">Cat</option>
-                <option class="optionList">Hamster</option>
-                <option class="optionList">Parrot</option>
-                <option class="optionList">Spider</option>
-                <option class="optionList">Goldfish</option>
+                <option class="optionList">Renseignement</option>
+                <option class="optionList">Demande de partenariat</option>
+                <option class="optionList">Réclamation</option>
+                <option class="optionList">Autres</option>
             </select>
         </div>
+
+        <textarea class="input2" rows="7" placeholder="Ecrivez votre messae...">
+        </textarea>
 
         <div class="checkbox-container">
             <label class="content">
@@ -34,6 +35,7 @@
                 <p class="seSouvenir">En créant ce compte, j'accepte les conditions générales d'utilisation</p>
             </label>
         </div>
+
         <BoutonText class="buttonLogin" textColor="var(--textcolorBlanc)" background="var(--colorbgGradientRouge)"
             borderSolid="var(--borderNone)">
             Envoyer un message
@@ -54,7 +56,6 @@
 <style scoped>
 .contact {
     background-color: black;
-    height: 100vh;
 }
 .titre {
     color: white;
@@ -101,6 +102,28 @@
     font-size: 13px;
 }
 
+.input2 {
+    width: 300px;
+    padding: 16px 14px;
+    margin-bottom: 10px;
+    border: 1px solid white;
+    background-color: black;
+    border-radius: 4px;
+    color: white;
+    font-family: var(--fontFamilyAndale);
+    text-align: center;
+}
+.input2:focus {
+    outline: 1px solid white;
+}
+.input2::placeholder {
+    text-align: center;
+    font-family: var(--fontFamilyAndale);
+    color: white;
+    opacity: 0.6;
+    font-size: 13px;
+}
+
 .inputGoupList {
     display: flex;
     flex-direction: column;
@@ -108,7 +131,7 @@
     align-items: center;
 }
 .inputGoupList select option {
-    width: 1000px;
+    width: 80px;
 }
 .inputGoupList select {
     display: flex;
@@ -119,8 +142,8 @@
 }
 
 .optionList {
-    font-size: 18px; /* Taille de police des options */
-    padding: 10px; /* Marges internes des options pour les agrandir */
+    font-size: 18px;
+    padding: 10px;
 }
 .divLabel {
     width: 100%;
@@ -133,7 +156,7 @@
     text-align: left;
 }
 .inputListe {
-    width: 330px;
+    width: 300px;
     padding: 14px 14px;
     margin-bottom: 10px;
     border: 1px solid white;

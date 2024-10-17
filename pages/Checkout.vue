@@ -1,11 +1,13 @@
 <template>
 <div class="checkout">
-    <NavBar />
+    <NavigationBar/>
     <h2 class="titre">PAIEMENT</h2>
 
-    <div class="connectGoogle">
-        <img src="assets\img\logoGoogle.png" class="googleLogo" />
-        <p class="textGoogle">Pay</p>
+    <div class="divGoogle">
+        <div class="connectGoogle">
+            <img src="assets\img\logoGoogle.png" class="googleLogo" />
+            <p class="textGoogle">Pay</p>
+        </div>
     </div>
     <br>
     <p class="ou"> ----------- ou ----------- </p>
@@ -59,7 +61,35 @@
             <p class="expedition5">Paiement</p>
         </div>
     </div>
-    
+
+    <div class="divDivPaiement">
+        <p class="paiementTitre">Toutes les transactions sont sécurisées et chiffrées</p>
+        <div class="divPaiement">
+            <div class="userInput">
+                <Icon name="logos:mastercard" size="15" class="iconInput1" />
+                <Icon name="logos:visaelectron" size="15" class="iconInput2" />
+                <Icon name="cib:american-express" size="15" class="iconInput3" />
+                <input class="inputPaie" placeholder="CARTE DE CREDIT">
+            </div>
+            <div class="userInput">
+                <input class="inputPaie" type="number" placeholder="NUMRO DE CARTE">
+            </div>
+            <div class="userInput">
+                <input class="inputPaie" type="number" placeholder="DATE DEXPIRATION (MM/YYY)">
+            </div>
+            <div class="userInput">
+                <input class="inputPaie" type="text" placeholder="NOM SUR LA CARTE">
+            </div>
+            <div class="userInput">
+                <input class="inputPaie2" type="text" placeholder="CVC">
+            </div>
+
+            <BoutonText class="buttonLogin" textColor="var(--textcolorBlanc)" background="var(--colorbgGradientRouge)"
+            borderSolid="var(--borderNone)" @click="login">
+            Payer
+        </BoutonText>
+        </div>
+    </div>
 </div>
 </template>
 
@@ -74,7 +104,6 @@
 <style scoped>
 .checkout {
     background-color: black;
-    height: 100vh;
 }
 
 .titre {
@@ -84,12 +113,20 @@
     font-size: 18px;
 }
 
+.divGoogle {
+    display: flex;
+    justify-content: center;
+}
 .connectGoogle {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
     margin: 15px 0;
+    border: 1px solid red;
+    width: 300px;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
 .googleLogo {
     width: 23px;
@@ -307,4 +344,87 @@
     margin-bottom: 10px;
     font-family: var(--fontFamilyAndale);
 }
+
+.divDivPaiement {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 50px;
+    margin-top: 50px;
+}
+.divPaiement {
+    border: 2px solid white;
+    width: 300px;
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.paiementTitre {
+    color: white;
+    font-family: var(--fontFamilyAndale);
+    text-transform: uppercase;
+    font-size: 9px;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.inputPaie {
+    width: 260px;
+    padding: 6px 14px;
+    margin-bottom: 10px;
+    border: 1px solid white;
+    background-color: black;
+    border-radius: 4px;
+    color: white;
+    font-family: var(--fontFamilyAndale);
+    text-align: center;
+}
+.inputPaie:focus {
+    outline: 1px solid white;
+}
+.inputPaie::placeholder {
+    text-align: left;
+    font-family: var(--fontFamilyAndale);
+    color: white;
+    opacity: 0.6;
+    font-size: 13px;
+}
+
+.iconInput1 {
+    position: absolute;
+    margin-left: 110px;
+}
+.iconInput2 {
+    position: absolute;
+    margin-left: 160px;
+}.iconInput3 {
+    position: absolute;
+    margin-left: 220px;
+}
+
+.inputPaie2 {
+    width: 100px;
+    padding: 6px 14px;
+    margin-bottom: 10px;
+    border: 1px solid white;
+    background-color: black;
+    border-radius: 4px;
+    color: white;
+    font-family: var(--fontFamilyAndale);
+    text-align: center;
+}
+.inputPaie2:focus {
+    outline: 1px solid white;
+}
+.inputPaie2::placeholder {
+    text-align: left;
+    font-family: var(--fontFamilyAndale);
+    color: white;
+    opacity: 0.6;
+    font-size: 13px;
+}
+
 </style>
