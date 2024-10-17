@@ -5,8 +5,8 @@
                 :imdbTitle="film.title" 
                 :imdbTime="film.movie_length" 
                 :imdbBanner="film.banner" 
-                :imdbRating="film.rating"
-                :imdbAge="-16"/>
+                :imdbRating="String(film.rating)"
+                :imdbAge="String(-16)"/>
             </div>
             <div v-if="film">
                 <div class="item item2">
@@ -44,7 +44,6 @@ const fetchRecommendedFilm = async () => {
         if (!response.ok) throw new Error('Erreur lors de la récupération du film');
         const data = await response.json();
         film.value = data.results; 
-        console.log('COUCOU', data);
         
     } catch (error) {
         console.error('Erreur lors de la récupération des données:', error);

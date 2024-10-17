@@ -1,6 +1,6 @@
 <template>
     <div class="profil">
-        <NavBar />
+        <NavigationBar />
 
         <h1 class="titre">MON COMPTE</h1>
 
@@ -32,9 +32,9 @@
 <script setup>
 const route = useRoute()
 
-const profilInfos = resolveComponent('infosProfil')
-const favorisInfos = resolveComponent('favorisListe')
-const historiqueInfos = resolveComponent('historiqueListe')
+const profilInfos = markRaw(resolveComponent('infosProfil'));
+const favorisInfos = markRaw(resolveComponent('favorisListe'));
+const historiqueInfos = markRaw(resolveComponent('historiqueListe'));
 
 const boutonSelectionne = ref('profil')
 const composantActif = ref(profilInfos)

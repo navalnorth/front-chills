@@ -2,35 +2,32 @@
     <div class="register">
         <h1 class="titre">Créez votre compte !</h1>
 
-    <form class="input-groupe">
+    <form class="input-groupe" @submit.prevent="register">
         <label class="userInput">
             <p class="labelText">Adresse mail</p>
-            <input class="input" type="text" placeholder="exemple@gmail.com">
+            <input class="input" type="text" placeholder="exemple@gmail.com" v-model="email">
         </label>
         <label class="userInput">
             <p class="labelText">Nom d'utilisateur</p>
-            <input class="input" type="text" placeholder="Créez un pseudo thème horreur">
+            <input class="input" type="text" placeholder="Créez un pseudo horroifique" v-model="username">
         </label>
         <label class="userInput">
             <p class="labelText">Nom</p>
-            <input class="input" type="text" placeholder="Votre nom">
+            <input class="input" type="text" placeholder="Votre nom" v-model="nom">
+        </label>
+        <label class="userInput">
+            <p class="labelText">Prenom</p>
+            <input class="input" type="text" placeholder="Votre prenom" v-model="prenom">
         </label>
         <label class="userInput">
             <p class="labelText">Age</p>
-            <input class="input" type="number" placeholder="Votre âge">
+            <input class="input" type="number" placeholder="Votre âge" v-model="age">
         </label>
         <label class="passwordInput">
             <p class="labelText">Mot de passe</p>
-            <input class="input" :type="isPasswordVisible ? 'text' : 'password'" placeholder="8 caractères minimum" ref="passwordInput" v-model="password">
+            <input class="input" :type="isPasswordVisible ? 'text' : 'password'" placeholder="8 caractères minimum" ref="passwordInput" v-model="mdp">
             <button type="button" class="iconMdp" @click="togglePassword">
                 <Icon :name="isPasswordVisible ? 'mdi-light:eye' : 'mdi-light:eye-off'"  size="30"/>
-            </button>
-        </label>
-        <label class="passwordInput">
-            <p class="labelText">Confirmation de mot de passe</p>
-            <input class="input" :type="isPasswordVisibleConfirmation ? 'text' : 'password'" placeholder="Confirmez le mot de passe" ref="PasswordInputConfirmation" v-model="passwordConfirmation">
-            <button type="button" class="iconMdp" @click="togglePasswordConfirmation">
-                <Icon :name="isPasswordVisibleConfirmation ? 'mdi-light:eye' : 'mdi-light:eye-off'"  size="30"/>
             </button>
         </label>
 
@@ -54,7 +51,7 @@
         </div>
 
         <BoutonText class="buttonRegister" textColor="var(--textcolorBlanc)" background="var(--colorbgGradientRouge)"
-            borderSolid="var(--borderNone)">
+            borderSolid="var(--borderNone)" @click="register">
             Créer un compte
         </BoutonText>
 
@@ -72,14 +69,18 @@
 
 
 <script setup>
-const password = ref('')
-const passwordConfirmation = ref('')
+const router = useRouter()
+
+const email = ref('')
+const username = ref('')
+const nom = ref('')
+const prenom = ref('')
+const age = ref('')
+const mdp = ref('')
 
 const isPasswordVisible = ref(false)
-const isPasswordVisibleConfirmation = ref(false)
 
 const passwordInput = ref(null)
-const PasswordInputConfirmation = ref(null)
 
 const togglePassword = () => {
     isPasswordVisible.value = !isPasswordVisible.value
@@ -87,18 +88,35 @@ const togglePassword = () => {
     nextTick(() => {
         const input = passwordInput.value
         input.focus()
-        input.setSelectionRange(password.value.length, password.value.length)
+        input.setSelectionRange(mdp.value.length, mdp.value.length)
     })
 }
-const togglePasswordConfirmation = () => {
-    isPasswordVisibleConfirmation.value = !isPasswordVisibleConfirmation.value
-    
-    nextTick(() => {
-        const input = PasswordInputConfirmation.value
-        input.focus()
-        input.setSelectionRange(passwordConfirmation.value.length, passwordConfirmation.value.length)
-    })
-}
+
+
+
+const register = async () => {
+    try {
+        const body = {
+            username: username.value,
+            nom: nom.value,
+            prenom: prenom.value,
+            age: age.value,
+            email: email.value,
+            mdp: mdp.value,
+        };
+
+        const data = await $fetch('http://localhost:3001/api/users/register', {
+            method: 'POST',
+            body,
+        });
+
+        router.push('/login');
+    } catch (error) {
+        console.error('Erreur lors de la création de compte:', error);
+    }
+};
+
+
 
 </script>
 

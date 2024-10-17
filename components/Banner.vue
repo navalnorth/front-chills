@@ -34,7 +34,7 @@
     width: 50%; /* Modifiez ceci pour la largeur souhaitée de l'image */
     height: 100%;
     top: 0;
-    right: -26%; /* Positionne le conteneur à 50% du conteneur parent */
+    right: -25%; /* Positionne le conteneur à 50% du conteneur parent */
     transform: translateX(-50%); /* Centre l'arête gauche de l'image */
 }
 
