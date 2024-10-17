@@ -4,19 +4,30 @@
             <div>{{ text }}</div>
         </div>
         <div class="grid-container" :style="gridStyle">
-            <!-- Première et deuxième ligne -->
-            <div class="item"><img src='../assets/img/MYSTERES.png' alt="Mystères"></div>
-            <div class="item"><img src='../assets/img/HORREUR.png' alt="Horreur"></div>
-            <div class="item"><img src='../assets/img/GUERRE.png' alt="Guerre"></div>
-            <div class="item"><img src='../assets/img/CRIMES.png' alt="Crimes"></div>
 
-            <!-- Troisième ligne (affichée uniquement si `thirdRowShow` est vrai) -->
-            <div v-if="thirdRowShow" class="item"><img src='../assets/img/SCI-FI.png' alt="Sci-Fi"></div>
-            <div v-if="thirdRowShow" class="item"><img src='../assets/img/THRILLER.png' alt="Thriller"></div>
+            <NuxtLink to="/mystere" class="item">
+                <img src='../assets/img/MYSTERES.png' alt="Mystères">
+            </NuxtLink>
+            <NuxtLink to="/horreur" class="item">
+                <img src='../assets/img/HORREUR.png' alt="Horreur">
+            </NuxtLink>
+            <NuxtLink to="/guerre" class="item">
+                <img src='../assets/img/GUERRE.png' alt="Guerre">
+            </NuxtLink>
+            <NuxtLink to="/crime" class="item">
+                <img src='../assets/img/CRIMES.png' alt="Crimes">
+            </NuxtLink>
+            
+            <NuxtLink v-if="thirdRowShow" to="/sci-fi" class="item">
+                <img src='../assets/img/SCI-FI.png' alt="Sci-Fi">
+            </NuxtLink>
+            <NuxtLink v-if="thirdRowShow" to="/thriller" class="item">
+                <img src='../assets/img/THRILLER.png' alt="Thriller">
+            </NuxtLink>
         </div>
     </div>
-
 </template>
+
 <script setup>
 
 const props = defineProps({
