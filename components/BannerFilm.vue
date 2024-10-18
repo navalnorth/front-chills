@@ -2,11 +2,14 @@
     <div class="grid-container">
         <div class="item item1">
             <Card  v-if="film"
+                :key="film.imdb_id"
                 :imdbTitle="film.title" 
                 :imdbTime="film.movie_length" 
                 :imdbBanner="film.banner" 
                 :imdbRating="String(film.rating)"
-                :imdbAge="String(-16)"/>
+                :imdbAge="String(-16)"
+                @click="goToFilm(film.imdb_id)"
+                />
             </div>
             <div v-if="film">
                 <div class="item item2">
@@ -35,8 +38,12 @@
 </template>
 
 <script setup>
-
+const router = useRouter()
 const film = ref(null);
+
+const goToFilm = (imdb_id) => {
+    router.push(`/pageFilm/${imdb_id}`)
+}
 
 const fetchRecommendedFilm = async () => { 
     try {

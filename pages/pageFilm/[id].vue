@@ -65,11 +65,14 @@
         <div class="card-container">
             <Card v-for="(film, index) in horrorFilms" :key="film.imdb_id" :imdbTitle="film.title"
                 :imdbTime="film.movie_length" :imdbBanner="film.banner" :imdbRating="String(film.rating)"
-                :imdbAge="String(-16)" />
+                :imdbAge="String(-16)" 
+                @click="goToFilm(film.imdb_id)"
+            />
         </div>
         <Arm />
         <Subtitle title="VOUS AIMEREZ AUSSI" :showImage="false" :centeredTitle="true" />
         <BannerFilm />
+        <Catalogue />
         <Footer />
     </div>
 </template>
@@ -78,6 +81,7 @@
 
 <script setup>
 const route = useRoute()
+const router = useRouter()
 const horrors = ref([]);
 const horrorFilms = ref([]);
 const ActeursFilm = ref([]);
@@ -85,6 +89,9 @@ const selectedFilm = ref(null);
 const isVisible = ref(true)
 const isVsibleActeur = ref(true)
 
+const goToFilm = (imdb_id) => {
+    router.push(`/pageFilm/${imdb_id}`)
+}
 
 const toggleShow = () => {
     isVisible.value = !isVisible.value
@@ -97,7 +104,7 @@ const toggleActeur = () => {
 
 const fetchActor = async () => {
     try {
-        const response = await fetch(`http://localhost:3001/api/search/castByMovie/${route.params.id}`);
+        const response = await fetch(`http://localhost:3001/api/search/castInfoByMovie/${route.params.id}`);
         const data = await response.json();
 
         const sixActeurs = data.cast.slice(0, 6)
@@ -326,7 +333,7 @@ onMounted(async () => {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 40px;
+    gap: 50px;
 }
 .divImageCasting {
     height: 10vh;

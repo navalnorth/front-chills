@@ -12,6 +12,7 @@
             :imdbBanner="film.banner"
             :imdbRating="String(film.rating)"
             :imdbAge="String(-16)"
+            @click="goTofilm(film.imdb_id)"
         />
     </div>
     <Subtitle title="VOS FAVORIS" :showImage="false" />
@@ -24,6 +25,7 @@
             :imdbBanner="film.banner" 
             :imdbRating="String(film.rating)"
             :imdbAge="String(-16)"
+            @click="goTofilm(film.imdb_id)"
         />
     </div>
     <Subtitle title="NOS FILMS CULTES" :showImage="false" />
@@ -36,6 +38,7 @@
             :imdbBanner="film.banner" 
             :imdbRating="String(film.rating)"
             :imdbAge="String(-16)"
+            @click="goTofilm(film.imdb_id)"
         />
     </div>
     <Subtitle title="NOS MEILLEURS THRILLER" :showImage="false" />
@@ -48,6 +51,7 @@
             :imdbBanner="film.banner" 
             :imdbRating="String(film.rating)"
             :imdbAge="String(-16)"
+            @click="goTofilm(film.imdb_id)"
         />
     </div>
     <Banner />
@@ -62,13 +66,16 @@
 </template>
 
 <script setup>
-import NavigationBar from '~/components/NavigationBar.vue';
-
+const router = useRouter()
 
 const horrors = ref([]);
 const horrorFilms = ref([]);
 const thrillers = ref([]);
 const thrillerFilms = ref([]);
+
+const goTofilm = (imdb_id) => {
+    router.push(`/pageFilm/${imdb_id}`)
+}
 
 const fetchHorrorGenres = async () => {
     try {
