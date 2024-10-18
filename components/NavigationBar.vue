@@ -15,10 +15,9 @@
             <div class="navAlignement">
               <NuxtLink to="/">Accueil</NuxtLink>
               <NuxtLink to="/Films">Films</NuxtLink>
-              <NuxtLink to="/Series">Series</NuxtLink>
               <NuxtLink to="/categories">Categories</NuxtLink>
               <NuxtLink to="/NoreSelection">Notre Sélection</NuxtLink>
-              <NuxtLink to="/NotreOffre">Notre Offre</NuxtLink>
+              <NuxtLink to="/offre">Notre Offre</NuxtLink>
             </div>
           </nav>
         </div>
@@ -53,7 +52,7 @@
     
            <div v-if="filmDetails.length" class="filmIndex">
             <div class="film-container">
-              <div class="film" v-for="(film, index) in filmDetails.slice(0, 5)" :key="index">
+              <div class="film" v-for="(film, index) in filmDetails.slice(0, 5)" :key="index" @click="directionFilm(film.results.imdb_id)">
                 <div class="film-banner">
                   <img :src="film.results.banner" alt="" />
                 </div>
@@ -76,7 +75,7 @@
     
 
               <div v-if="showMoreFilms" class="film-container">
-                <div class="film" v-for="(film, index) in filmDetails.slice(5)" :key="index">
+                <div class="film" v-for="(film, index) in filmDetails.slice(5)" :key="index" @click="directionFilm(film.results.imdb_id)">
                   <div class="film-banner">
                     <img :src="film.results.banner" alt="" />
                   </div>
@@ -106,6 +105,7 @@ const navbarFixed = ref(false)
 const isSearchVisible = ref(false)
 const showMoreFilms = ref(false);
 const searchQuery = ref('');
+const router = useRouter()
 
 const filmTitle = ref([]); // Pour stocker les films avec tous les détails
 const imdbIds = ref([]); // Pour stocker uniquement les IMDb IDs
@@ -193,7 +193,9 @@ const fetchFilmDetails = async (imdbIdsArray) => {
   console.log('Détails des films:', filmDetails.value); // Affiche les détails récupérés
 };
 
-
+const directionFilm = (imdb_id) => {
+  router.push(`/pageFilm/${imdb_id}`)
+} 
 </script>
 
 <style scoped>
