@@ -46,7 +46,6 @@
 <style scoped>
 .newsletter {
     background-color: black;
-    height: 100vh;
 }
 
 .ban {
