@@ -95,7 +95,7 @@ await fetchThrillerFilmDetails();
     -webkit-box-shadow: 0px 0px 50px 0px #FF0000; 
     box-shadow: 0px 0px 15px 0px #ff00008c;
     overflow: visible;
-    z-index: 1000;
+    z-index: 2;
 }
 
 .selector-text{

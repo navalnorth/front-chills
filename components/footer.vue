@@ -21,10 +21,9 @@
       </div>
       <transition name="slide-fade">
         <div class="footer-link-clicked" v-show="isCatalogueOpen">
-          <div class="footer-link-clicked-item"><a href="">LIEN 1</a></div>
-          <div class="footer-link-clicked-item"><a href="">LIEN 2</a></div>
-          <div class="footer-link-clicked-item"><a href="">LIEN 3</a></div>
-          <div class="footer-link-clicked-item"><a href="">LIEN 4</a></div>
+          <div class="footer-link-clicked-item"><a href="">LES NOUVEAUTES</a></div>
+          <div class="footer-link-clicked-item"><a href="">NOTRE SELECTION HALLOWEEN</a></div>
+          <div class="footer-link-clicked-item"><a href="">LES FILMS CULTES</a></div>
         </div>
       </transition>
 
@@ -53,10 +52,11 @@
     </div>
     <transition name="slide-fade">
       <div class="footer-link-clicked" v-show="isLienUtileOpen">
-        <div class="footer-link-clicked-item"><a href="">LIEN 1</a></div>
+        <NuxtLink to="/partenaires" class="footer-link-clicked-item">
+          PARTENAIRES
+        </NuxtLink>
         <div class="footer-link-clicked-item"><a href="">LIEN 2</a></div>
         <div class="footer-link-clicked-item"><a href="">LIEN 3</a></div>
-        <div class="footer-link-clicked-item"><a href="">LIEN 4</a></div>
       </div>
     </transition>
 
@@ -76,7 +76,12 @@
         <div>Conditions d'utilisation</div>
       </div>
       <div class="footer-mention-lineThree">
-          Tous droits reserves. Reproduction interdite.
+          <p>
+            Tous droits reserves. Reproduction interdite.
+          </p>
+          <p>
+            Created with fun by Kevin, Mohamed, Denis & Cecile.
+          </p>
       </div>
     </div>
   </div>
@@ -188,7 +193,6 @@ const toggleLienUtile = () => {
 }
 
 .footer-link-clicked-item a {
-  text-decoration: none;
   color: inherit;
 }
 
