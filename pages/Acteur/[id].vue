@@ -43,7 +43,7 @@ const actorId = decodeURIComponent(route.params.id)
 const personnalInfo = ref(null)
 const filmoActeur = ref([])
 
-const goToFilmPage = (imdbId) => {
+const goToFilmPage = (imdbId) => {erh
   router.push(`/pageFilm/${imdbId}`)
 }
 

@@ -9,7 +9,7 @@
       <div><img src="/assets/img/discord.png" alt="discord" width="45px" class="icon" /></div>
     </div>
     <div class="footer-question">
-      <p>UNE QUESTION ? <span><u>CONTACTEZ-NOUS !</u></span></p>
+      <p>UNE QUESTION ? <span><u><NuxtLink to="/contact">CONTACTEZ-NOUS !</NuxtLink></u></span></p>
     </div>
 
     <!-- NOTRE CATALOGUE -->
@@ -21,9 +21,9 @@
       </div>
       <transition name="slide-fade">
         <div class="footer-link-clicked" v-show="isCatalogueOpen">
-          <div class="footer-link-clicked-item"><a href="">LES NOUVEAUTES</a></div>
-          <div class="footer-link-clicked-item"><a href="">NOTRE SELECTION HALLOWEEN</a></div>
-          <div class="footer-link-clicked-item"><a href="">LES FILMS CULTES</a></div>
+          <div class="footer-link-clicked-item"><NuxtLink class="aLink" to="/hrreur"> NOUVEAUTES</NuxtLink></div>
+          <div class="footer-link-clicked-item"><NuxtLink class="aLink" to="/horreur">NOTRE SELECTION HALLOWEEN</NuxtLink></div>
+          <div class="footer-link-clicked-item"><NuxtLink class="aLink" to="/thriller"> FILMS CULTES</NuxtLink></div>
         </div>
       </transition>
 
@@ -36,10 +36,10 @@
     </div>
     <transition name="slide-fade">
       <div class="footer-link-clicked" v-show="isFaqOpen">
-        <div class="footer-link-clicked-item"><a href="">LIEN 1</a></div>
-        <div class="footer-link-clicked-item"><a href="">LIEN 2</a></div>
-        <div class="footer-link-clicked-item"><a href="">LIEN 3</a></div>
-        <div class="footer-link-clicked-item"><a href="">LIEN 4</a></div>
+        <div class="footer-link-clicked-item"><NuxtLink class="aLink" to="">LIEN 1</NuxtLink></div>
+        <div class="footer-link-clicked-item"><NuxtLink class="aLink" to="">LIEN 2</NuxtLink></div>
+        <div class="footer-link-clicked-item"><NuxtLink class="aLink" to="">LIEN 3</NuxtLink></div>
+        <div class="footer-link-clicked-item"><NuxtLink class="aLink" to="">LIEN 4</NuxtLink></div>
       </div>
     </transition>
 
@@ -55,8 +55,8 @@
         <NuxtLink to="/partenaires" class="footer-link-clicked-item">
           PARTENAIRES
         </NuxtLink>
-        <div class="footer-link-clicked-item"><a href="">LIEN 2</a></div>
-        <div class="footer-link-clicked-item"><a href="">LIEN 3</a></div>
+        <div class="footer-link-clicked-item"><NuxtLink class="aLink" to="/reles">Regles</NuxtLink></div>
+        <div class="footer-link-clicked-item"><NuxtLink class="aLink" to="/mentions">Mentions legales</NuxtLink></div>
       </div>
     </transition>
 
@@ -190,6 +190,8 @@ const toggleLienUtile = () => {
   display: flex;
   align-items: center;
   justify-content: center;
+  color: inherit;
+  text-decoration: none;
 }
 
 .footer-link-clicked-item a {
@@ -238,6 +240,10 @@ const toggleLienUtile = () => {
 .slide-fade-enter-to, .slide-fade-leave-from {
   max-height: 500px;
   opacity: 1;
+}
+.aLink {
+  color: inherit;
+  text-decoration: none
 }
 
 

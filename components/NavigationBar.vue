@@ -14,9 +14,8 @@
           <nav class="nav">
             <div class="navAlignement">
               <NuxtLink to="/">Accueil</NuxtLink>
-              <NuxtLink to="/Films">Films</NuxtLink>
               <NuxtLink to="/categories">Categories</NuxtLink>
-              <NuxtLink to="/NoreSelection">Notre Sélection</NuxtLink>
+              <NuxtLink to="/horreur">Notre Sélection</NuxtLink>
               <NuxtLink to="/offre">Notre Offre</NuxtLink>
             </div>
           </nav>

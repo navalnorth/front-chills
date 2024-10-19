@@ -1,11 +1,11 @@
 <template>
-    <NavigationBar />
+    <div class="toutFilm">
+        <NavigationBar />
     <div class="container">
-        <img src="../assets/img/crimePage.png" alt="" class="backgroundimg">
-        <img src="../assets/img/CRIMES.svg" alt="" class="svgimg">
+        <img src="../assets/img/toutFilm.png" alt="" class="backgroundimg">
     </div>
+    <p class="filmTerrifiant">PUS DE 1000 FILMS TERRIFIANTS</p>
     <div class="selector-container">
-
         <div class="selector-text"> <p>FORMAT</p> <AkChevronDown class="icon"/></div>
         <div class="selector-text"> <p>GENRE</p> <AkChevronDown class="icon"/></div>
         <div class="selector-text"> <p>PAYS</p> <AkChevronDown class="icon"/></div>
@@ -27,6 +27,7 @@
     <BannerFilm />
     <Catalogue :rows="3" :cols="2" :thirdRowShow="true" text="PLUS DE 10000 FILMS"/>
     <Footer/>
+    </div>
 </template>
 <script setup>
 import { AkChevronDown } from '@kalimahapps/vue-icons';
@@ -41,10 +42,10 @@ const goToFilm = (imdb_id) => {
 
 const fetchThrillerGenres = async () => {
     try {
-        const response = await fetch('http://localhost:3001/api/search/genre/Crime');
+        const response = await fetch('http://localhost:3001/api/search/genre/War');
         if (!response.ok) throw new Error('Erreur lors de la récupération des genres');
         const data = await response.json();
-        thrillers.value = data.results ? data.results.slice(0, 11) : [];
+        thrillers.value = data.results ? data.results.slice(0, 30) : [];
     } catch (error) {
         console.error('Erreur lors de la récupération des données:', error);
     }
@@ -68,6 +69,9 @@ await fetchThrillerFilmDetails();
 
 </script>
 <style scoped>
+.toutFilm {
+    background-color: black;
+}
 .container {
     height: 280px;
     width: auto;
@@ -78,6 +82,8 @@ await fetchThrillerFilmDetails();
 .backgroundimg {
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    overflow: hidden;
 }
 
 .svgimg {
@@ -126,5 +132,10 @@ await fetchThrillerFilmDetails();
     gap: 20px; 
     padding: 40px 0; 
 }
-
+.filmTerrifiant {
+    text-align: center;
+    color: white;
+    font-family: var(--fontFamilyAndale);
+    margin: 20px 0
+}
 </style>
