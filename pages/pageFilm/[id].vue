@@ -12,11 +12,11 @@
                         <h1 class="titreFilm">{{ selectedFilm.title }}</h1>
                         <p class="duration">{{ selectedFilm.movie_length }} <strong>min</strong></p>
                         <p class="annee">{{ selectedFilm.year }}</p>
-
+                        <Icon name="mdi:heart" size="30" class="iconCoeur" @click="toggleFavorite" :class="{ redCoeur: isFavorite}"/>
                         <p class="rating">{{ selectedFilm.rating }}</p>
                         <BoutonText class="buttonVoir" textColor="var(--textcolorBlanc)"
                             background="var(--colorbgGradientRouge)" borderSolid="var(--borderNone)">
-                            Voir Film
+                            <NuxtLink to="/offre">Voir Film</NuxtLink>
                         </BoutonText>
                         <BoutonText class="boutonTrailer" textColor="var(--textcolorBlanc)"
                             background="var(--colorbgTransparent)" borderSolid="var(--borderRouge)" @click="toggleShow">
@@ -88,9 +88,14 @@ const ActeursFilm = ref([]);
 const selectedFilm = ref(null);
 const isVisible = ref(true)
 const isVsibleActeur = ref(true)
+const isFavorite = ref(false)
 
 const goToFilm = (imdb_id) => {
     router.push(`/pageFilm/${imdb_id}`)
+}
+
+const toggleFavorite = () => {
+    isFavorite.value = !isFavorite.value
 }
 
 const toggleShow = () => {
@@ -150,6 +155,24 @@ const fetchFilmDetails = async () => {
         console.error('Erreur lors de la récupération des détails des films:', error);
     }
 };
+
+
+// const favoris = async () => {
+//   try {
+//     const body = {
+//       username: username.value,
+//       mdp: mdp.value,
+//     }
+
+//     const data = await $fetch(`http://localhost:3001/api/users/favoris/${route.params.id}`, {
+//       method: 'POST',
+//       body,
+//     })
+
+//   } catch (error) {
+//     console.error('Erreur lors de la connexion:', error)
+//   }
+// }
 
 
 onMounted(async () => {
@@ -275,6 +298,10 @@ onMounted(async () => {
     margin-left: 220px;
     margin-bottom: 20px;
 }
+.buttonVoir a {
+    color: inherit;
+    text-decoration: none;
+}
 
 .boutonTrailer {
     bottom: 0;
@@ -361,5 +388,16 @@ onMounted(async () => {
 .iconInput {
     margin-top: 5px;
     margin-right: 5px;
+}
+.iconCoeur {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    margin-left: 200px;
+    margin-bottom: 158px;
+    color: grey;
+}
+.redCoeur {
+    color: red;
 }
 </style>

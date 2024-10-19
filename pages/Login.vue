@@ -1,5 +1,6 @@
 <template>
     <div class="login">
+        <NavigationBar />
         <h1 class="titre">CONNECTEZ-VOUS !</h1>
 
     <form @submit.prevent="login" class="input-groupe">

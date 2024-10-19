@@ -20,6 +20,7 @@
             :imdbBanner="film.banner" 
             :imdbRating="String(film.rating)"
             :imdbAge="String(-16)"
+            @click="goToFilm(film.imdb_id)"
         />
     </div>
     <Subtitle title="NOUS VOUS CONSEILLONS" :showImage="true" :centeredTitle="true" />
@@ -32,7 +33,11 @@ import { AkChevronDown } from '@kalimahapps/vue-icons';
 
 const thrillers = ref([]);
 const thrillerFilms = ref([]);
+const router = useRouter()
 
+const goToFilm = (imdb_id) => {
+    router.push(`/pageFilm/${imdb_id}`)
+}
 
 const fetchThrillerGenres = async () => {
     try {

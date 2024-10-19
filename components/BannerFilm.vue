@@ -25,12 +25,12 @@
                 </div>
             </div>
         <div class="item item3">
-            <BoutonText class="bouton" textColor="var(--textcolorBlanc)" background="var(--colorbgNoir)" borderSolid="var(--borderRouge)">
+            <BoutonText class="bouton" textColor="var(--textcolorBlanc)" background="var(--colorbgNoir)" borderSolid="var(--borderRouge)"  @click="goToFilm(film.imdb_id)">
                 BANDE ANNONCE
             </BoutonText>
         </div>
         <div class="item item4">
-            <BoutonText class="bouton" textColor="var(--textcolorBlanc)" background="var(--colorbgRouge)" borderSolid="var(--borderRouge)">
+            <BoutonText class="bouton" textColor="var(--textcolorBlanc)" background="var(--colorbgRouge)" borderSolid="var(--borderRouge)"  @click="goToFilm(film.imdb_id)">
                 VOIR LE FILM
             </BoutonText>
         </div>
