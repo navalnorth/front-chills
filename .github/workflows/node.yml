@@ -10,15 +10,16 @@ jobs:
       name: Validate all commits
       steps:
         - uses: actions/checkout@v3
-          with:
-            fetch-depth: 0
+          # with:
+          #   token: ${{ secrets.PAT }} # your personal access token
+          #   fetch-depth: 0
         - name: Conventional Commits Checker
           uses: netodevel/convetional-commits-checker@v1.0.1
           id: commits-check
           with: # do not change the order of params
-            target-branch: main  # spécifiez la branche principale directement si nécessaire
-            current-branch: ${{ github.head_ref }}
-            pattern: '(feat|fix|ci|chore|docs|test|style|refactor): .{1,}$'
+            target-branch: ${{ github.event.pull_request.base.ref }}  #required
+            current-branch: ${{ github.event.pull_request.head.ref }} #required
+            pattern: '(feat|fix|ci|chore|docs|test|style|refactor): .{1,}$' #optional custom validation commit
   build:
     runs-on: ubuntu-latest
 
@@ -33,8 +34,6 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - name: List Branches for Debugging
-        run: git branch -a
 
       # Installez toutes les dépendances y compris ESLint
       - name: Install dependencies
