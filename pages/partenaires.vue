@@ -1,7 +1,7 @@
 <template>
     <NavigationBar />
         <div class="container">
-            <img src="../assets/img/partenairePage.png" alt="" class="backgroundimg">
+            <img src="../assets/img/partenairePAGE.png" alt="" class="backgroundimg">
             <img src="../assets/img/PARTENAIRES.svg" alt="" class="svgimg">
         </div>
         <div>
