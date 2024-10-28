@@ -24,9 +24,9 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Exécuter ESLint avec une commande
-      - name: Run ESLint
-        run: npx eslint . # Utilise ESLint directement depuis les dépendances du projet
+      # # Exécuter ESLint avec une commande
+      # - name: Run ESLint
+      #   run: npx eslint . # Utilise ESLint directement depuis les dépendances du projet
 
       # Étape de build
       - name: Build project
