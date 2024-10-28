@@ -10,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [16.x, 18.x, 20.x] # Assurez-vous d'avoir une version >= 16.x pour 'node:util'
+        node-version: [16.x, 18.x, 20.x]
 
     steps:
       - uses: actions/checkout@v4
@@ -19,18 +19,16 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-          
-      # Installez les dépendances du projet y compris ESLint
+
+      # Installez toutes les dépendances y compris ESLint
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
-      # Exécutez ESLint après l'installation des dépendances
+      # Exécuter ESLint avec une commande
       - name: Run ESLint
-        uses: stefanoeb/eslint-action@1.0.2
-        with:
-          files: "."
+        run: npx eslint . # Utilise ESLint directement depuis les dépendances du projet
 
-      # Étape de build (si nécessaire)
+      # Étape de build
       - name: Build project
         run: npm run build --if-present
 
