@@ -33,6 +33,8 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
+      - name: List Branches for Debugging
+        run: git branch -a
 
       # Installez toutes les dépendances y compris ESLint
       - name: Install dependencies
