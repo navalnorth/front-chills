@@ -10,7 +10,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [18.x, 20.x, 22.x]
+        node-version: [16.x, 18.x, 20.x] # Assurez-vous d'avoir une version >= 16.x pour 'node:util'
 
     steps:
       - uses: actions/checkout@v4
@@ -20,15 +20,15 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
           
-      # Installez les dépendances avant d'exécuter ESLint
+      # Installez les dépendances du projet y compris ESLint
       - name: Install dependencies
-        run: npm install --dev
+        run: npm install
 
       # Exécutez ESLint après l'installation des dépendances
       - name: Run ESLint
         uses: stefanoeb/eslint-action@1.0.2
         with:
-          files: "."  # Vérifiez le dossier ou les fichiers à analyser
+          files: "."
 
       # Étape de build (si nécessaire)
       - name: Build project
