@@ -3,89 +3,105 @@
         <NavigationBar />
         <h1 class="titre">CONNECTEZ-VOUS !</h1>
 
-    <form @submit.prevent="login" class="input-groupe">
-        <div>
-            <Icon name="ph:user-light" size="30" class="iconInput" />
-            <input class="input" type="text" placeholder="Email ou nom d'utilisateur" v-model="username">
-        </div>
-        <div class="passwordInput">
-            <Icon name="streamline:padlock-square-1" size="30" class="iconInput" />
-            <input class="input" :type="isPasswordVisible ? 'text' : 'password'" placeholder="Mot de passe" ref="passwordInput" v-model="mdp">
-            <button type="button" class="iconMdp" @click="togglePassword">
-                <Icon :name="isPasswordVisible ? 'mdi-light:eye' : 'mdi-light:eye-off'"  size="30"/>
-            </button>
-        </div>
-        <div class="mdp">
-            <NuxtLink>Mot de passe oublié ?</NuxtLink>
-        </div>
+        <form @submit.prevent="login" class="input-groupe">
+            <div>
+                <Icon name="ph:user-light" size="30" class="iconInput" />
+                <input class="input" type="text" placeholder="Email ou nom d'utilisateur" v-model="username">
+            </div>
+            <div class="passwordInput">
+                <Icon name="streamline:padlock-square-1" size="30" class="iconInput" />
+                <input class="input" :type="isPasswordVisible ? 'text' : 'password'" placeholder="Mot de passe" ref="passwordInput" v-model="mdp">
+                <button type="button" class="iconMdp" @click="togglePassword">
+                    <Icon :name="isPasswordVisible ? 'mdi-light:eye' : 'mdi-light:eye-off'" size="30"/>
+                </button>
+            </div>
+            <div class="mdp">
+                <NuxtLink>Mot de passe oublié ?</NuxtLink>
+            </div>
 
-        <div class="checkbox-container">
-            <label class="content">
-                <input type="checkbox">
-                <span class="checkmark"></span>
-                <p class="seSouvenir">Se souvenir de moi</p>
-            </label>
-        </div>
-        <BoutonText class="buttonLogin" textColor="var(--textcolorBlanc)" background="var(--colorbgGradientRouge)"
-            borderSolid="var(--borderNone)" @click="login">
-            Se Connecter
-        </BoutonText>
-
-        <div class="connectGoogle">
-            <img src="assets\img\logoGoogle.png" class="googleLogo" />
-            <p class="textGoogle">Se connecter avec Google</p>
-        </div>
-
-        <div>
-            <p class="textRegister">Vous n'avez pas de compte ?</p>
-            <BoutonText 
-                class="boutonRegister" textColor="var(--textcolorBlanc)" background="var(--colorbgNoir)" borderSolid="var(--borderRouge)">
-                <NuxtLink to="/Register">Créer un compte</NuxtLink>
+            <div class="checkbox-container">
+                <label class="content">
+                    <input type="checkbox">
+                    <span class="checkmark"></span>
+                    <p class="seSouvenir">Se souvenir de moi</p>
+                </label>
+            </div>
+            <BoutonText class="buttonLogin" textColor="var(--textcolorBlanc)" background="var(--colorbgGradientRouge)"
+                borderSolid="var(--borderNone)">
+                Se Connecter
             </BoutonText>
-        </div>
-    </form>
+
+            <div class="connectGoogle">
+                <img src="assets\img\logoGoogle.png" class="googleLogo" />
+                <p class="textGoogle">Se connecter avec Google</p>
+            </div>
+
+            <div>
+                <p class="textRegister">Vous n'avez pas de compte ?</p>
+                <BoutonText 
+                    class="boutonRegister" textColor="var(--textcolorBlanc)" background="var(--colorbgNoir)" borderSolid="var(--borderRouge)">
+                    <NuxtLink to="/Register">Créer un compte</NuxtLink>
+                </BoutonText>
+            </div>
+
+            <!-- Affichage des messages d'erreur -->
+            <div v-if="errorMessage" class="error-message">{{ errorMessage }}</div>
+        </form>
     </div>
 </template>
 
-
-
 <script setup>
-const router = useRouter()
+import { ref, nextTick, computed } from 'vue';
+import { useRouter } from 'vue-router';
 
-const username = ref('admin')
-const mdp = ref('Admin123456789*')
-const isPasswordVisible = ref(false)
-const passwordInput = ref(null)
+const router = useRouter();
+
+const username = ref('user');
+const mdp = ref('User123456789*');
+const isPasswordVisible = ref(false);
+const passwordInput = ref(null);
+const errorMessage = ref('');
 
 const togglePassword = () => {
-    isPasswordVisible.value = !isPasswordVisible.value
+    isPasswordVisible.value = !isPasswordVisible.value;
     
     nextTick(() => {
-        const input = passwordInput.value
-        input.focus()
-        input.setSelectionRange(mdp.value.length, mdp.value.length)
-    })
-    
-}
-
+        const input = passwordInput.value;
+        input.focus();
+        input.setSelectionRange(mdp.value.length, mdp.value.length);
+    });
+};
 
 const login = async () => {
-  try {
-    const body = {
-      username: username.value,
-      mdp: mdp.value,
+    errorMessage.value = '';
+
+    if (!username.value || !mdp.value) {
+        errorMessage.value = 'Veuillez remplir tous les champs.';
+        return;
     }
 
-    const data = await $fetch('http://localhost:3001/api/users/login', {
-      method: 'POST',
-      body,
-    })
+    try {
+        const body = {
+            username: username.value,
+            mdp: mdp.value,
+        };
 
-    router.push('/2fa')
-  } catch (error) {
-    console.error('Erreur lors de la connexion:', error)
-  }
-}
+        const data = await $fetch('http://localhost:3001/api/users/login', {
+            method: 'POST',
+            body,
+        });
+
+        if (data.error) {
+            errorMessage.value = data.error; // Affiche le message d'erreur retourné par l'API
+            return;
+        }
+
+        router.push('/2fa');
+    } catch (error) {
+        console.error('Erreur lors de la connexion:', error.response || error);
+        errorMessage.value = 'Erreur de connexion. Veuillez réessayer.';
+    }
+};
 </script>
 
 

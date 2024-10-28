@@ -26,8 +26,7 @@
             <div class="passwordInput">
                 <Icon name="streamline:padlock-square-1" size="30" class="iconInput" />
                 <input class="input" :type="isPasswordVisibleNew ? 'text' : 'password'"
-                    placeholder="Nouveau mot de passe" ref="newPasswordInput"
-                    v-model="newMdp">
+                    placeholder="Nouveau mot de passe" ref="newPasswordInput" v-model="newMdp">
                 <button type="button" class="iconMdp" @click="togglePasswordNew">
                     <Icon :name="isPasswordVisibleNew ? 'mdi-light:eye' : 'mdi-light:eye-off'" size="30" />
                 </button>
@@ -40,12 +39,6 @@
                     <p class="textCoche">Je souhaite recevoir les nouveautés et actualités par email</p>
                 </label>
             </div>
-
-            <!-- <BoutonText class="modifierInfos" textColor="var(--textcolorBlanc)" background="var(--colorbgNoir)"
-                borderSolid="var(--borderRouge)">
-                <NuxtLink to="/Login">Modifier les informations</NuxtLink>
-                <Icon name="mdi:pencil-circle-outline" size="30" class="iconBouton"/>
-            </BoutonText> -->
 
             <BoutonText class="sauvegarder" textColor="var(--textcolorBlanc)" background="var(--colorbgGradientRouge)"
                 borderSolid="var(--borderNone)" @click="saveChanges">

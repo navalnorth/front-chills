@@ -17,16 +17,16 @@
         </div>
 
         <label class="userInput">
-            <input class="input" type="number" placeholder="Nom...">
+            <input class="input" type="text" placeholder="Nom...">
         </label>
         <label class="userInput">
-            <input class="input" type="number" placeholder="Prénom...">
+            <input class="input" type="text" placeholder="Prénom...">
         </label>
         <label class="userInput">
-            <input class="input" type="number" placeholder="Adresse...">
+            <input class="input" type="text" placeholder="Adresse...">
         </label>
         <label class="userInput">
-            <input class="input" type="number" placeholder="Adresse...">
+            <input class="input" type="text" placeholder="Adresse...">
         </label>
         <label class="userInput">
             <input class="input" type="number" placeholder="Code postal...">
@@ -90,7 +90,7 @@
                 </div>
 
                 <BoutonText class="buttonLogin" textColor="var(--textcolorBlanc)"
-                    background="var(--colorbgGradientRouge)" borderSolid="var(--borderNone)" @click="login">
+                    background="var(--colorbgGradientRouge)" borderSolid="var(--borderNone)">
                     Payer
                 </BoutonText>
             </div>

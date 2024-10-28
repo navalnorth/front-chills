@@ -27,7 +27,7 @@
         </div>
 
         <div class="divBouton">
-            <BoutonText class="buttonLogin" textColor="var(--textcolorBlanc)" background="var(--colorbgGradientRouge)"
+            <BoutonText class="button" textColor="var(--textcolorBlanc)" background="var(--colorbgGradientRouge)"
             borderSolid="var(--borderNone)">
             Je m'inscris pour frissoner
             </BoutonText>
@@ -145,5 +145,24 @@
     display: flex;
     justify-content: center;
     margin-top: 15px;
+}
+
+@media screen and (min-width: 1000px) {
+    .input {
+        width: 500px;
+    }
+    .button {
+        width: 500px;
+    }
+    .text {
+        font-size: 26px
+    }
+    .titre {
+        font-size: 50px;
+    }
+    .ban {
+        overflow: hidden;
+        height: 600px;
+    }
 }
 </style>

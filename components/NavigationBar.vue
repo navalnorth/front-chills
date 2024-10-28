@@ -1,5 +1,6 @@
 <template>
-  <div class="tout" :class="[!isClosed || navbarFixed ? 'navbar-fixed' : '']" :style="{ backgroundColor: `${navbarOpacity}` }">
+  <div class="tout" :class="[!isClosed || navbarFixed ? 'navbar-fixed' : '']"
+    :style="{ backgroundColor: `${navbarOpacity}` }">
     <div @click="openMenu">
       <div v-if="isClosed">
         <div class="iconDiv">
@@ -41,17 +42,42 @@
 
 
   <div :class="isSearchVisible ? 'transition transitionActive' : 'transition'">
-      <div class="search-container">
-        <h1>Rechercher</h1>
-        <div class="search-bar">
-          <div class="iconDivBar">
-            <Icon name="lsicon:search-filled" size="25" class="icon" />
+    <div class="search-container">
+      <h1>Rechercher</h1>
+      <div class="search-bar">
+        <div class="iconDivBar">
+          <Icon name="lsicon:search-filled" size="25" class="icon" />
+        </div>
+        <input type="text" v-model="searchQuery" @keyup="searchFilm" placeholder="Films, acteur...">
+
+        <div v-if="filmDetails.length" class="filmIndex">
+          <div class="film-container">
+            <div class="film" v-for="(film, index) in filmDetails.slice(0, 5)" :key="index"
+              @click="directionFilm(film.results.imdb_id)">
+              <div class="film-banner">
+                <img :src="film.results.banner" alt="" />
+              </div>
+              <div>
+                <div class="film-title">{{ film.results.title }}</div>
+                <div class="film-info">
+                  <div class="film-length">{{ film.results.movie_length }} min</div>
+                  <div class="film-year">{{ film.results.year }}</div>
+                </div>
+              </div>
+              <div class="film-classification">{{ film.results.content_rating }}</div>
+            </div>
           </div>
-          <input type="text" v-model="searchQuery" @keyup="searchFilm" placeholder="Films, acteur...">
-    
-           <div v-if="filmDetails.length" class="filmIndex">
-            <div class="film-container">
-              <div class="film" v-for="(film, index) in filmDetails.slice(0, 5)" :key="index" @click="directionFilm(film.results.imdb_id)">
+
+
+          <div v-if="filmDetails.length > 5">
+            <button @click="showMoreFilms = !showMoreFilms" class="boutonShow">
+              {{ showMoreFilms ? 'Voir moins' : `Voir les ${filmDetails.length - 5} films supplémentaires` }}
+            </button>
+
+
+            <div v-if="showMoreFilms" class="film-container">
+              <div class="film" v-for="(film, index) in filmDetails.slice(5)" :key="index"
+                @click="directionFilm(film.results.imdb_id)">
                 <div class="film-banner">
                   <img :src="film.results.banner" alt="" />
                 </div>
@@ -65,34 +91,11 @@
                 <div class="film-classification">{{ film.results.content_rating }}</div>
               </div>
             </div>
-    
-
-            <div v-if="filmDetails.length > 5">
-              <button @click="showMoreFilms = !showMoreFilms" class="boutonShow">
-                {{ showMoreFilms ? 'Voir moins' : `Voir les ${filmDetails.length - 5} films supplémentaires` }}
-              </button>
-    
-
-              <div v-if="showMoreFilms" class="film-container">
-                <div class="film" v-for="(film, index) in filmDetails.slice(5)" :key="index" @click="directionFilm(film.results.imdb_id)">
-                  <div class="film-banner">
-                    <img :src="film.results.banner" alt="" />
-                  </div>
-                  <div>
-                    <div class="film-title">{{ film.results.title }}</div>
-                    <div class="film-info">
-                      <div class="film-length">{{ film.results.movie_length }} min</div>
-                      <div class="film-year">{{ film.results.year }}</div>
-                    </div>
-                  </div>
-                  <div class="film-classification">{{ film.results.content_rating }}</div>
-                </div>
-              </div>
-            </div>
-          </div> 
+          </div>
         </div>
       </div>
     </div>
+  </div>
 </template>
 
 <script setup>
@@ -113,26 +116,26 @@ const filmDetails = ref([]); // Pour stocker les détails des films
 const genre = ref(['War', 'Mystery', 'Horror', 'Crime', 'Sci-Fi', 'Thriller']);
 
 const openMenu = () => {
-isClosed.value = !isClosed.value
+  isClosed.value = !isClosed.value
 
   if (!isClosed.value) {
-      navbarOpacity.value = "rgba(0, 0, 0, .7)"
-      navbarFixed.value = true
+    navbarOpacity.value = "rgba(0, 0, 0, .7)"
+    navbarFixed.value = true
   } else {
-      navbarOpacity.value = 1
-      navbarFixed.value = false
+    navbarOpacity.value = 1
+    navbarFixed.value = false
   }
 }
 
 const scrollEvent = (e) => {
-const scrollTop = document.documentElement.scrollTop
+  const scrollTop = document.documentElement.scrollTop
 
   if (scrollTop === 0) {
-      navbarOpacity.value = 'rgba(0,0,0,1)'
-      navbarFixed.value = false
+    navbarOpacity.value = 'rgba(0,0,0,1)'
+    navbarFixed.value = false
   } else {
-      navbarOpacity.value = "rgba(0, 0, 0, .7)"
-      navbarFixed.value = true
+    navbarOpacity.value = "rgba(0, 0, 0, .7)"
+    navbarFixed.value = true
   }
 }
 
@@ -161,7 +164,7 @@ const fetchFilmByTitle = async (title) => {
   try {
     const response = await fetch(`http://localhost:3001/api/search/film/${title}`);
     if (!response.ok) throw new Error(`Erreur lors de la récupération du film ${title}`);
-    
+
     const data = await response.json();
     filmTitle.value = data.results; // Met à jour filmTitle
 
@@ -200,12 +203,12 @@ const directionFilm = (imdb_id) => {
 <style scoped>
 .v-enter-active,
 .v-leave-active {
-background-color: #000;
+  background-color: #000;
 }
 
 .v-enter-from,
 .v-leave-to {
-background-color: #000;
+  background-color: #000;
 }
 
 .tout {
@@ -218,7 +221,7 @@ background-color: #000;
 
 .slide-fade-enter-active,
 .slide-fade-leave-active {
-background-color: #000;
+  background-color: #000;
 
   transition: max-height 0.5s ease, opacity 0.5s ease;
   overflow: hidden;
@@ -226,7 +229,7 @@ background-color: #000;
 
 .slide-fade-enter-from,
 .slide-fade-leave-to {
-background-color: #000;
+  background-color: #000;
 
   max-height: 0;
   opacity: 0;
@@ -234,7 +237,7 @@ background-color: #000;
 
 .slide-fade-enter-to,
 .slide-fade-leave-from {
-background-color: #000;
+  background-color: #000;
 
   max-height: 1000px;
   opacity: 1;
@@ -277,7 +280,6 @@ background-color: #000;
   width: 100%;
   max-width: 300px;
 }
-
 .navAlignement a {
   text-decoration: none;
   color: white;
@@ -287,15 +289,20 @@ background-color: #000;
   text-align: left;
   padding-left: 10px;
 }
+@media screen and (min-width: 1000px) {
+  .navAlignement {
+    align-items: center;
+  }
+  .navAlignement a {
+    font-size: 30px;
+  }
+}
 
 .logo {
-  position: absolute;
   display: flex;
-  align-items: flex-start;
-  top: 5px;
-  left: 36%;
+  align-items: center;
+  justify-content: center;
   cursor: pointer;
-  padding: 15px 0;
 }
 
 .navDroite {
@@ -334,6 +341,11 @@ background-color: #000;
 .search-bar input::placeholder {
   color: #aaa;
 }
+@media screen and (min-width: 1000px) {
+  .search-bar input {
+    width: 800px;
+  }
+}
 
 /* Positionner l'icône dans l'input */
 .iconDivBar {
@@ -345,13 +357,15 @@ background-color: #000;
 
 .icon {
   color: #aaa;
-  font-size: 20px; /* Ajuster la taille de l'icône si nécessaire */
+  font-size: 20px;
+  /* Ajuster la taille de l'icône si nécessaire */
 }
 
 .filmIndex {
   position: relative;
   z-index: 874954894984;
 }
+
 .film-container {
   margin-top: 8px;
   display: flex;
@@ -403,13 +417,13 @@ background-color: #000;
 }
 
 .transition {
-height: 0px;
-transition: .3s;
-overflow: hidden;
+  height: 0px;
+  transition: .3s;
+  overflow: hidden;
 }
 
 .transitionActive {
-height: 87px;
-overflow: visible;
+  height: 87px;
+  overflow: visible;
 }
 </style>

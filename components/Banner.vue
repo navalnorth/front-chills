@@ -5,7 +5,7 @@
             <p class="text-content-p">Êtes-vous prêts à affronter vos pires cauchemars ?</p>
             <div class="text-content-button">
                 <BoutonText class="bouton" textColor="var(--textcolorNoir)" background="var(--colorbgJaune)" borderSolid="var(--border-none)">
-                    PLONGEZ DANS LA TERREUR
+                    <NuxtLink to="/horreur">PLONGEZ DANS LA TERREUR</NuxtLink>
                 </BoutonText>
             </div>
         </div>
@@ -42,7 +42,16 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-   
+}
+@media screen and (min-width: 1000px) {
+    .image-container {
+        display: flex;
+        justify-content: flex-end;
+    }
+    .image-container img {
+        object-position: 0px -120px;
+        width: 50%;
+    }
 }
 .text-content {
     color:var(--textcolorBlanc);
@@ -72,6 +81,10 @@
 .text-content-button { 
     width: 80%;
     margin-top: 5px;
+}
+.bouton a {
+    color:inherit;
+    text-decoration: none;
 }
 
 </style>

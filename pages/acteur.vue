@@ -18,15 +18,11 @@
         SA FILMOGRAPHIE
     </div>
     <div class="filmographieList">
-        <Card v-for="(film, index) in infoActeur"
-        :key="film.results.imdb_id"
-        :imdbTitle="film.results.title"
-        :imdbTime="film.results.movie_length"
-        :imdbBanner="film.results.banner"
-        :imdbRating="film.results.rating"
-        :imdbAge="-16"/>
+        <Card v-for="(film, index) in infoActeur" :key="film.results.imdb_id" :imdbTitle="film.results.title"
+            :imdbTime="film.results.movie_length" :imdbBanner="film.results.banner" :imdbRating="film.results.rating"
+            :imdbAge="-16" />
     </div>
-    <Catalogue :row="2" :col="2" :thirdRowShow="false" text="PLUS DE 10000 FILMS"/>
+    <Catalogue :row="2" :col="2" :thirdRowShow="false" text="PLUS DE 10000 FILMS" />
     <Footer />
 </template>
 
@@ -37,25 +33,25 @@ const infoActeur = ref([]);
 const personnalInfo = ref([])
 
 const actorName = 'oscar isaac';
-const idActeur = ref(''); 
+const idActeur = ref('');
 
 
 const fetchActorInfo = async () => {
-    const encodedName = encodeURIComponent(actorName); 
+    const encodedName = encodeURIComponent(actorName);
 
     try {
         const response = await fetch(`http://localhost:3001/api/search/filmbyactorname/${encodedName}`);
-        
+
         // Vérifie si la réponse est correcte
         if (!response.ok) throw new Error('Erreur lors de la récupération des données');
-        
+
         const data = await response.json();
         console.log(data); // Affiche la réponse pour vérification
 
         // Vérifie si 'resultat' existe dans les données
         if (data.resultat) {
-            infoActeur.value = data.resultat.film; 
-            idActeur.value = data.resultat.idActor; 
+            infoActeur.value = data.resultat.film;
+            idActeur.value = data.resultat.idActor;
         } else {
             console.warn('Aucun résultat trouvé dans la réponse:', data);
         }
@@ -67,11 +63,11 @@ const fetchActorInfo = async () => {
             const response = await fetch(`http://localhost:3001/api/search/filmbyactorname/id/${idActeur.value}`)
             // Vérifie si la réponse est correcte
             if (!response.ok) throw new Error('Erreur lors de la récupération des données');
-            
+
             const data = await response.json();
             console.log("new DATA", data); // Affiche la réponse pour vérification
 
-            if(data.results) {
+            if (data.results) {
                 personnalInfo.value = data.results
             } else {
                 console.warn('Aucun résultat trouvé dans la réponse:', data)
@@ -106,7 +102,8 @@ onMounted(() => {
 
 .acteur-info {
     display: flex;
-    justify-content: space-between; /* Sépare les éléments avec espace */
+    justify-content: space-between;
+    /* Sépare les éléments avec espace */
     width: 100%;
     font-family: var(--fontFamilyImpact);
     font-size: 26px;
@@ -114,7 +111,8 @@ onMounted(() => {
     margin: 10px;
 }
 
-.acteur-img, .acteur-name {
+.acteur-img,
+.acteur-name {
     width: 50%;
 }
 
@@ -128,7 +126,7 @@ onMounted(() => {
 
 .acteur-img img {
     width: 100%;
-    height: auto; 
+    height: auto;
 }
 
 .acteur-desc {
@@ -145,11 +143,16 @@ onMounted(() => {
 }
 
 .hr {
-    width: 70%; /* Fait en sorte que le hr prenne toute la largeur de son conteneur */
-    border: none; /* Supprime la bordure par défaut */
-    height: 1px; /* Définit l'épaisseur de la ligne */
-    background-color: var(--textcolorBlanc); /* Change la couleur de fond pour l'apparence de la ligne */
-    margin: 20px 0 15px 0; /* Ajoute des marges autour de la ligne */
+    width: 70%;
+    /* Fait en sorte que le hr prenne toute la largeur de son conteneur */
+    border: none;
+    /* Supprime la bordure par défaut */
+    height: 1px;
+    /* Définit l'épaisseur de la ligne */
+    background-color: var(--textcolorBlanc);
+    /* Change la couleur de fond pour l'apparence de la ligne */
+    margin: 20px 0 15px 0;
+    /* Ajoute des marges autour de la ligne */
 }
 
 .filmographie {
@@ -169,7 +172,7 @@ onMounted(() => {
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 16px; 
-    padding: 10px; 
+    gap: 16px;
+    padding: 10px;
 }
 </style>

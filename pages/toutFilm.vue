@@ -1,32 +1,37 @@
 <template>
     <div class="toutFilm">
         <NavigationBar />
-    <div class="container">
-        <img src="../assets/img/toutFilm.png" alt="" class="backgroundimg">
-    </div>
-    <p class="filmTerrifiant">PUS DE 1000 FILMS TERRIFIANTS</p>
-    <div class="selector-container">
-        <div class="selector-text"> <p>FORMAT</p> <AkChevronDown class="icon"/></div>
-        <div class="selector-text"> <p>GENRE</p> <AkChevronDown class="icon"/></div>
-        <div class="selector-text"> <p>PAYS</p> <AkChevronDown class="icon"/></div>
-        <div class="selector-text"> <p>ANNEE</p> <AkChevronDown class="icon"/></div>
-    </div>
-    <div class="card-containner">
-        <Card 
-            v-for="(film, index) in thrillerFilms" 
-            :key="film.imdb_id" 
-            :imdbTitle="film.title" 
-            :imdbTime="film.movie_length" 
-            :imdbBanner="film.banner" 
-            :imdbRating="String(film.rating)"
-            :imdbAge="String(-16)"
-            @click="goToFilm(film.imdb_id)"
-        />
-    </div>
-    <Subtitle title="NOUS VOUS CONSEILLONS" :showImage="true" :centeredTitle="true" />
-    <BannerFilm />
-    <Catalogue :rows="3" :cols="2" :thirdRowShow="true" text="PLUS DE 10000 FILMS"/>
-    <Footer/>
+        <div class="container">
+            <img src="../assets/img/toutFilm.png" alt="" class="backgroundimg">
+        </div>
+        <p class="filmTerrifiant">PUS DE 1000 FILMS TERRIFIANTS</p>
+        <div class="selector-container">
+            <div class="selector-text">
+                <p>FORMAT</p>
+                <AkChevronDown class="icon" />
+            </div>
+            <div class="selector-text">
+                <p>GENRE</p>
+                <AkChevronDown class="icon" />
+            </div>
+            <div class="selector-text">
+                <p>PAYS</p>
+                <AkChevronDown class="icon" />
+            </div>
+            <div class="selector-text">
+                <p>ANNEE</p>
+                <AkChevronDown class="icon" />
+            </div>
+        </div>
+        <div class="card-containner">
+            <Card v-for="(film, index) in thrillerFilms" :key="film.imdb_id" :imdbTitle="film.title"
+                :imdbTime="film.movie_length" :imdbBanner="film.banner" :imdbRating="String(film.rating)"
+                :imdbAge="String(-16)" @click="goToFilm(film.imdb_id)" />
+        </div>
+        <Subtitle title="NOUS VOUS CONSEILLONS" :showImage="true" :centeredTitle="true" />
+        <BannerFilm />
+        <Catalogue :rows="3" :cols="2" :thirdRowShow="true" text="PLUS DE 10000 FILMS" />
+        <Footer />
     </div>
 </template>
 <script setup>
@@ -72,6 +77,7 @@ await fetchThrillerFilmDetails();
 .toutFilm {
     background-color: black;
 }
+
 .container {
     height: 280px;
     width: auto;
@@ -93,23 +99,23 @@ await fetchThrillerFilmDetails();
     width: 49%;
 }
 
-.selector-container { 
+.selector-container {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
     min-height: 30px;
     background-color: var(--colorbgNoir);
-    color:var(--textcolorBlanc);
+    color: var(--textcolorBlanc);
     font-size: 12px;
     font-family: var(--fontFamilyAndale);
     padding: 0 17px;
-    -webkit-box-shadow: 0px 0px 50px 0px #FF0000; 
+    -webkit-box-shadow: 0px 0px 50px 0px #FF0000;
     box-shadow: 0px 0px 15px 0px #ff00008c;
     overflow: visible;
     z-index: 2;
 }
 
-.selector-text{
+.selector-text {
     display: flex;
     gap: 5px;
     cursor: pointer;
@@ -120,18 +126,19 @@ await fetchThrillerFilmDetails();
     font-size: 1.3em;
     margin-right: 0.5em;
     cursor: pointer;
-  }
+}
 
-  .card-containner {
+.card-containner {
     background-color: black;
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
-    gap: 20px; 
-    padding: 40px 0; 
+    gap: 20px;
+    padding: 40px 0;
 }
+
 .filmTerrifiant {
     text-align: center;
     color: white;

@@ -50,31 +50,42 @@ const goToFilmPage = (imdbId) => {erh
 
 const fetchActorInfo = async () => {
   try {
-    // Première requête : récupérer l'ID IMDb de l'acteur
-    const response = await fetch(`http://localhost:3001/api/search/filmbyactorname/${actorId}`);
+    const response = await fetch(`http://localhost:3001/api/search/actorDetail/${actorId}`);
     if (!response.ok) throw new Error('Erreur lors de la récupération des données de l\'acteur');
 
     const data = await response.json();
-    if (data.resultat) {
-      filmoActeur.value = data.resultat.film;
-      const imdbId = data.resultat.idActor;
-
-      // Deuxième requête : récupérer les informations détaillées de l'acteur
-      const responseDetails = await fetch(`http://localhost:3001/api/search/filmbyactorname/id/${imdbId}`);
-      if (!responseDetails.ok) throw new Error('Erreur lors de la récupération des détails de l\'acteur');
-      
-      const actorDetails = await responseDetails.json();
-      if (actorDetails.results) {
-        personnalInfo.value = actorDetails.results;
-      }
+    
+    if (data.results) {
+      personnalInfo.value = data.results;
     }
   } catch (error) {
     console.error('Erreur lors de la récupération des données:', error);
   }
 }
 
-onMounted(() => {
-  fetchActorInfo();
+
+const fetchActorMovies = async (actorId) => {
+  try {
+    const response = await fetch(`http://localhost:3001/api/movies/byActor/${actorId}`);
+    if (!response.ok) throw new Error('Erreur lors de la récupération des films de l\'acteur');
+
+    const data = await response.json();
+    
+    if (data.resultat && data.resultat.film) {
+      return data.resultat.film; // Retourne la liste des films
+    } else {
+      console.error('Aucun film trouvé pour cet acteur.');
+      return [];
+    }
+  } catch (error) {
+    console.error('Erreur lors de la récupération des films:', error);
+    return [];
+  }
+};
+
+onMounted(async () => {
+  await fetchActorInfo()
+  filmoActeur.value = await fetchActorMovies(actorId)
 });
 </script>
 
@@ -134,7 +145,7 @@ onMounted(() => {
 }
 
 .hr {
-    width: 70%;
+    width: 1000%;
     border: none;
     height: 1px;
     background-color: var(--textcolorBlanc);
