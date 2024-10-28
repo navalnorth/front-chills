@@ -22,7 +22,7 @@ jobs:
           
       # Installez les dépendances avant d'exécuter ESLint
       - name: Install dependencies
-        run: npm ci
+        run: npm install --dev
 
       # Exécutez ESLint après l'installation des dépendances
       - name: Run ESLint
