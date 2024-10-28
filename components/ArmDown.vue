@@ -22,7 +22,7 @@ img {
     object-fit: cover;
 }
 hr {
-    width: 60%;
+    width: 100%;
     height: 1px; 
     background-color: white; 
     border: none; 

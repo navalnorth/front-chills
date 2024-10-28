@@ -44,7 +44,7 @@ const fetchThrillerGenres = async () => {
         const response = await fetch('http://localhost:3001/api/search/genre/Horror');
         if (!response.ok) throw new Error('Erreur lors de la récupération des genres');
         const data = await response.json();
-        thrillers.value = data.results ? data.results.slice(0, 11) : [];
+        thrillers.value = data.results ? data.results.slice(0, 27) : [];
     } catch (error) {
         console.error('Erreur lors de la récupération des données:', error);
     }

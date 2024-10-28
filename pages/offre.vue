@@ -61,7 +61,7 @@
                 <img class="imgChoisir" src="/assets/img/offreEtapes/visionFilm.png">
                 <p class="textEtapes">
                     ----------------<br />
-                    Après avoir complété votre achat ou location, commencez à regarder instantanément sur votre 
+                    Après avoir complété votre achat ou location, commencez à regarder instantanément sur votre
                     appareil préféré. Préparez-vous pour une expérience horrifique immersive, où que vous soyez !
                 </p>
             </div>
@@ -148,6 +148,7 @@
 .butonLoue {
     width: 150px;
 }
+
 .butonLoue a {
     color: inherit;
     text-decoration: none;
@@ -190,5 +191,13 @@
     text-align: center;
     font-size: 12px;
     padding: 0 18px;
+}
+
+@media screen and (min-width: 1000px) {
+    .textEtapes {
+        font-size: 20px;
+        padding: 0 30px;
+
+    }
 }
 </style>

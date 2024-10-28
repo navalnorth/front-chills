@@ -64,6 +64,12 @@ imdbBanner: {
     font-family: var(--fontFamily);
     cursor: pointer;
   }
+  @media screen and (min-width: 1000px) {
+    .card {
+      min-width: 1px;
+      margin-bottom: 50px;
+    }
+  }
   
   .card-image img {
     width: 100%;

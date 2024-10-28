@@ -7,7 +7,7 @@
 </template>
 
 <script setup>
-
+import { ref, computed, onMounted, onUnmounted } from 'vue';
 import griffeTitre from '@/assets/img/griffeTitre.png';
 
 const props = defineProps({
@@ -23,12 +23,38 @@ const props = defineProps({
         type: Boolean,
         default: false
     }
-
 });
 
+// Référence pour la largeur de l'écran
+const screenWidth = ref(0);
+
+// Mettre à jour la largeur de l'écran lors du redimensionnement
+const handleResize = () => {
+    screenWidth.value = window.innerWidth;
+};
+
+// Attacher l'événement resize
+onMounted(() => {
+    // Assurer que le code ne s'exécute que côté client
+    if (typeof window !== 'undefined') {
+        screenWidth.value = window.innerWidth;
+        window.addEventListener('resize', handleResize);
+    }
+});
+
+// Détacher l'événement lorsque le composant est détruit
+onUnmounted(() => {
+    if (typeof window !== 'undefined') {
+        window.removeEventListener('resize', handleResize);
+    }
+});
+
+// Style dynamique du background
 const backgroundStyle = computed(() => {
+    const shouldShowImage = props.showImage && screenWidth.value < 1000;
+    
     return {
-        backgroundImage: props.showImage ? `url(${griffeTitre})` : 'none',
+        backgroundImage: shouldShowImage ? `url(${griffeTitre})` : 'none',
         backgroundSize: 'cover',
         backgroundPosition: '-50px center',
         backgroundRepeat: 'no-repeat',
@@ -55,6 +81,5 @@ const backgroundStyle = computed(() => {
     position: relative;
     display: flex;
     align-items: center;
-
 }
 </style>

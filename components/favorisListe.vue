@@ -1,14 +1,7 @@
 <template>
-    <div class="favorisListe">
-      <Card 
-          v-for="(film, index) in horrorFilms" 
-          :key="film.imdb_id" 
-          :imdbTitle="film.title" 
-          :imdbTime="film.movie_length" 
-          :imdbBanner="film.banner" 
-          :imdbRating="String(film.rating)"
-          :imdbAge="String(-16)"
-      />
+  <div class="favorisListe">
+    <Card v-for="(film, index) in horrorFilms" :key="film.imdb_id" :imdbTitle="film.title" :imdbTime="film.movie_length"
+      :imdbBanner="film.banner" :imdbRating="String(film.rating)" :imdbAge="String(-16)" />
   </div>
 </template>
 
@@ -37,16 +30,16 @@ const favorisId = async () => {
 
 
 const fetchFilmDetails = async () => {
-    const filmPromises = favoris.value.map(film =>
-        fetch(`http://localhost:3001/api/search/film/idFilm/${film.id_filmAPI}`).then(res => res.json())
-    )
+  const filmPromises = favoris.value.map(film =>
+    fetch(`http://localhost:3001/api/search/film/idFilm/${film.id_filmAPI}`).then(res => res.json())
+  )
 
-    try {
-        const filmResponses = await Promise.all(filmPromises);
-        horrorFilms.value = filmResponses.map(response => response.results).flat()
-    } catch (error) {
-        console.error('Erreur lors de la récupération des détails des films:', error);
-    }
+  try {
+    const filmResponses = await Promise.all(filmPromises);
+    horrorFilms.value = filmResponses.map(response => response.results).flat()
+  } catch (error) {
+    console.error('Erreur lors de la récupération des détails des films:', error);
+  }
 }
 
 
@@ -61,14 +54,14 @@ onMounted(async () => {
 
 <style scoped>
 .favorisListe {
-    background-color: black;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    gap: 16px; 
-    padding: 10px; 
-    margin-top: 30px;
+  background-color: black;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  padding: 10px;
+  margin-top: 30px;
 }
 </style>

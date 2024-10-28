@@ -1,7 +1,7 @@
 <template>
     <div class="fa2">
         <h1 class="titre">Merci de vérifier votre adresse email</h1>
-    
+
         <form @submit.prevent="fa2" class="input-groupe">
             <p class="textRenvoyer">
                 Nous avons envoyé un email, merci de saisir le code reçu
@@ -18,11 +18,11 @@
                 </v-otp-input>
             </div>
 
-            <BoutonText class="buttonLogin" @click="fa2"
-                textColor="var(--textcolorBlanc)" background="var(--colorbgGradientRouge)" borderSolid="var(--borderNone)">
+            <BoutonText class="buttonLogin" @click="fa2" textColor="var(--textcolorBlanc)"
+                background="var(--colorbgGradientRouge)" borderSolid="var(--borderNone)">
                 Créer un compte
             </BoutonText>
-    
+
             <p class="textRenvoyer">Vous n'avez rien reçu ?</p>
             <p class="lienRenvoyer">Renvoyer le mail</p>
         </form>
@@ -47,8 +47,8 @@ const fa2 = async () => {
             method: 'POST',
             body,
             headers: { Authorization: `Bearer ${token}` }
-        });
-        console.log(data);
+        })
+        
         if (data && data.token) {
             localStorage.setItem('jwtToken', data.token);
             router.push(`/profil/${data.userId}`)
@@ -98,7 +98,8 @@ const fa2 = async () => {
     font-family: var(--fontFamilyAndale);
     margin-left: 10px;
 }
-.custom-otp-input{
+
+.custom-otp-input {
     padding: 0;
     margin-bottom: 20px;
 }
@@ -118,6 +119,7 @@ const fa2 = async () => {
     text-align: center;
     font-family: var(--fontFamilyAndale);
 }
+
 .lienRenvoyer {
     font-size: 14px;
     color: white;
@@ -138,9 +140,11 @@ const fa2 = async () => {
     font-family: var(--fontFamilyAndale);
     text-align: center;
 }
+
 .input:focus {
     outline: 1px solid white;
 }
+
 .input::placeholder {
     text-align: center;
     font-family: var(--fontFamilyAndale);
@@ -148,6 +152,7 @@ const fa2 = async () => {
     opacity: 0.6;
     font-size: 13px;
 }
+
 .iconInput {
     color: white;
     opacity: 0.6;

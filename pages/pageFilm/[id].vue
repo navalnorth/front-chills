@@ -9,11 +9,18 @@
                         <img :src="selectedFilm.banner" class="banniere" />
                     </div>
                     <div class="container">
-                        <h1 class="titreFilm">{{ selectedFilm.title }}</h1>
-                        <p class="duration">{{ selectedFilm.movie_length }} <strong>min</strong></p>
-                        <p class="annee">{{ selectedFilm.year }}</p>
-                        <Icon name="mdi:heart" size="30" class="iconCoeur" @click="toggleFavorite" :class="{ redCoeur: isFavorite}"/>
-                        <p class="rating">{{ selectedFilm.rating }}</p>
+                        <div class="infoEtCoeur">
+                            <div>
+                                <h1 class="titreFilm">{{ selectedFilm.title }}</h1>
+                                <p class="duration">{{ selectedFilm.movie_length }} <strong>min</strong></p>
+                                <p class="annee">{{ selectedFilm.year }}</p>
+                                <p class="rating">{{ selectedFilm.rating }}</p>
+                            </div>
+                            <Icon name="mdi:heart" size="30" class="iconCoeur" @click="toggleFavorite"
+                                :class="{ redCoeur: isFavorite }" />
+                        </div>
+
+
                         <BoutonText class="buttonVoir" textColor="var(--textcolorBlanc)"
                             background="var(--colorbgGradientRouge)" borderSolid="var(--borderNone)">
                             <NuxtLink to="/offre">Voir Film</NuxtLink>
@@ -37,22 +44,22 @@
                         {{ selectedFilm.description }}
                     </p>
                 </div>
-                    <div @click="toggleActeur">
+                <div @click="toggleActeur">
                     <div class="buttonCasting">
                         <Icon name="icon-park-outline:movie" size="15" class="iconInput" />
                         <p>CASTING +</p>
                     </div>
-                    </div>
-                    <div v-if="!isVsibleActeur">
-                        <ul class="displayCasting">
-                            <li  v-for="acteur in ActeursFilm" :key="acteur.name">
-                                <div class="divImageCasting">
-                                    <img class="imageCasting" :src="acteur.image" />
-                                </div>
-                                <p class="nameCasting">{{ acteur.name }}</p>
-                            </li>
-                        </ul>
-                    </div>
+                </div>
+                <div v-if="!isVsibleActeur">
+                    <ul class="displayCasting">
+                        <li v-for="acteur in ActeursFilm" :key="acteur.name">
+                            <div class="divImageCasting">
+                                <img class="imageCasting" :src="acteur.image" @click="goToActor(acteur.imdb_id)" />
+                            </div>
+                            <p class="nameCasting">{{ acteur.name }}</p>
+                        </li>
+                    </ul>
+                </div>
             </div>
             <div v-else>
                 <div class="chargement">
@@ -65,9 +72,7 @@
         <div class="card-container">
             <Card v-for="(film, index) in horrorFilms" :key="film.imdb_id" :imdbTitle="film.title"
                 :imdbTime="film.movie_length" :imdbBanner="film.banner" :imdbRating="String(film.rating)"
-                :imdbAge="String(-16)" 
-                @click="goToFilm(film.imdb_id)"
-            />
+                :imdbAge="String(-16)" @click="goToFilm(film.imdb_id)" />
         </div>
         <Arm />
         <Subtitle title="VOUS AIMEREZ AUSSI" :showImage="false" :centeredTitle="true" />
@@ -93,18 +98,20 @@ const isFavorite = ref(false)
 const goToFilm = (imdb_id) => {
     router.push(`/pageFilm/${imdb_id}`)
 }
+const goToActor = (imdb_id) => {
+    router.push(`/acteur/${imdb_id}`);
+}
 
 const toggleFavorite = () => {
     isFavorite.value = !isFavorite.value
 }
-
 const toggleShow = () => {
     isVisible.value = !isVisible.value
 }
-
 const toggleActeur = () => {
     isVsibleActeur.value = !isVsibleActeur.value
 }
+
 
 
 const fetchActor = async () => {
@@ -114,9 +121,8 @@ const fetchActor = async () => {
 
         const sixActeurs = data.cast.slice(0, 6)
 
-
         ActeursFilm.value = sixActeurs
-        
+
     } catch (error) {
         console.error(`Erreur lors de la récupération des acteurs avec l'ID ${route.params.id}:`, error);
     }
@@ -178,6 +184,7 @@ const fetchFilmDetails = async () => {
 onMounted(async () => {
     await fetchFilm();
     await fetchActor()
+    await fetchActorInfo()
     await fetchHorrorGenres();
     await fetchFilmDetails();
 });
@@ -210,7 +217,7 @@ onMounted(async () => {
 }
 
 .divBaniere {
-    height: 70vh;
+    height: 80vh;
     width: 100%;
 }
 
@@ -298,6 +305,7 @@ onMounted(async () => {
     margin-left: 220px;
     margin-bottom: 20px;
 }
+
 .buttonVoir a {
     color: inherit;
     text-decoration: none;
@@ -362,40 +370,50 @@ onMounted(async () => {
     align-items: center;
     gap: 50px;
 }
+
 .divImageCasting {
     height: 10vh;
     width: 100%;
 }
+
 .imageCasting {
     width: 60px;
     overflow: hidden;
-    height: 20px;
-    height: 100%;
+    height: 60px;
     object-fit: cover;
     border-radius: 50%;
 }
+
 .nameCasting {
     font-size: 9px;
 }
 
 .buttonCasting {
-   display: flex;
-   justify-content: flex-end;
-   margin-right: 40px;
-   margin-bottom: 10px;
+    display: flex;
+    justify-content: flex-end;
+    margin-right: 40px;
+    margin-bottom: 10px;
 }
 
 .iconInput {
     margin-top: 5px;
     margin-right: 5px;
 }
+.infoEtCoeur {
+    display: block;
+}
+
+
 .iconCoeur {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    margin-left: 200px;
-    margin-bottom: 158px;
     color: grey;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    margin-left: 20px;
+    margin-bottom: 85px;
+    z-index: 10;
 }
 .redCoeur {
     color: red;

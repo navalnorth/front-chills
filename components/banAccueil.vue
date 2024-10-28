@@ -107,7 +107,7 @@ onMounted(() => {
 .nextButton {
     width: 50px;
     height: 600px;
-    background-color: rgba(0, 0, 0, 0.3);
+    background-color: rgba(0, 0, 0, 0);
     position: absolute;
     right: 0;
     bottom: 0;
@@ -117,7 +117,7 @@ onMounted(() => {
 .prevButton {
     width: 50px;
     height: 600px;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0);
     position: absolute;
     left: 0;
     bottom: 0;
@@ -162,6 +162,15 @@ onMounted(() => {
 .activeDot {
     background-color: #D9D9D9CC;
 }
+
+@media screen and (min-width: 1000px) {
+    .image {
+        object-position: 10px -320px;
+    }
+    .slider-container {
+        height: 630px;
+    }
+ }
 </style>
 
 

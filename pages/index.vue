@@ -1,67 +1,39 @@
 <template>
     <div class="tout">
         <NavigationBar />
-    <BanAccueil />
-    <Subtitle title="LES DERNIERES FRAYEURS" :showImage="true" />
-    <div class="card-container">
-        <Card
-            v-for="(film, index) in horrorFilms"
-            :key="film.imdb_id"
-            :imdbTitle="film.title"
-            :imdbTime="film.movie_length"
-            :imdbBanner="film.banner"
-            :imdbRating="String(film.rating)"
-            :imdbAge="String(-16)"
-            @click="goTofilm(film.imdb_id)"
-        />
-    </div>
-    <Subtitle title="VOS FAVORIS" :showImage="false" />
-    <div class="card-container">
-        <Card 
-            v-for="(film, index) in cultesFilms" 
-            :key="film.imdb_id" 
-            :imdbTitle="film.title" 
-            :imdbTime="film.movie_length" 
-            :imdbBanner="film.banner" 
-            :imdbRating="String(film.rating)"
-            :imdbAge="String(-16)"
-            @click="goTofilm(film.imdb_id)"
-        />
-    </div>
-    <Subtitle title="NOS FILMS CULTES" :showImage="false" />
-    <div class="card-container">
-        <Card 
-            v-for="(film, index) in cultesFilms" 
-            :key="film.imdb_id" 
-            :imdbTitle="film.title" 
-            :imdbTime="film.movie_length" 
-            :imdbBanner="film.banner" 
-            :imdbRating="String(film.rating)"
-            :imdbAge="String(-16)"
-            @click="goTofilm(film.imdb_id)"
-        />
-    </div>
-    <Subtitle title="NOS MEILLEURS THRILLER" :showImage="false" />
-    <div class="card-container">
-        <Card 
-            v-for="(film, index) in thrillerFilms" 
-            :key="film.imdb_id" 
-            :imdbTitle="film.title" 
-            :imdbTime="film.movie_length" 
-            :imdbBanner="film.banner" 
-            :imdbRating="String(film.rating)"
-            :imdbAge="String(-16)"
-            @click="goTofilm(film.imdb_id)"
-        />
-    </div>
-    <Banner />
-    <Arm/>
-    <Subtitle title="A DECOUVRIR SUR CHILLS" :showImage="true" :centeredTitle="true" />
-    <BannerFilm />
-    <Catalogue :rows="3" :cols="2" :thirdRowShow="true" text="PLUS DE 10000 FILMS"/>
-    <Newsletter />
-    <ArmDown />
-    <Footer />
+        <BanAccueil />
+        <Subtitle title="LES DERNIERES FRAYEURS" :showImage="true" />
+        <div class="card-container">
+            <Card v-for="(film, index) in horrorFilms" :key="film.imdb_id" :imdbTitle="film.title"
+                :imdbTime="film.movie_length" :imdbBanner="film.banner" :imdbRating="String(film.rating)"
+                :imdbAge="String(-16)" @click="goTofilm(film.imdb_id)" />
+        </div>
+        <Subtitle title="VOS FAVORIS" :showImage="false" />
+        <div class="card-container">
+            <Card v-for="(film, index) in cultesFilms" :key="film.imdb_id" :imdbTitle="film.title"
+                :imdbTime="film.movie_length" :imdbBanner="film.banner" :imdbRating="String(film.rating)"
+                :imdbAge="String(-16)" @click="goTofilm(film.imdb_id)" />
+        </div>
+        <Subtitle title="NOS FILMS CULTES" :showImage="false" />
+        <div class="card-container">
+            <Card v-for="(film, index) in cultesFilms" :key="film.imdb_id" :imdbTitle="film.title"
+                :imdbTime="film.movie_length" :imdbBanner="film.banner" :imdbRating="String(film.rating)"
+                :imdbAge="String(-16)" @click="goTofilm(film.imdb_id)" />
+        </div>
+        <Subtitle title="NOS MEILLEURS THRILLER" :showImage="false" />
+        <div class="card-container">
+            <Card v-for="(film, index) in thrillerFilms" :key="film.imdb_id" :imdbTitle="film.title"
+                :imdbTime="film.movie_length" :imdbBanner="film.banner" :imdbRating="String(film.rating)"
+                :imdbAge="String(-16)" @click="goTofilm(film.imdb_id)" />
+        </div>
+        <Banner />
+        <Arm />
+        <Subtitle title="A DECOUVRIR SUR CHILLS" :showImage="true" :centeredTitle="true" />
+        <BannerFilm />
+        <Catalogue :rows="3" :cols="2" :thirdRowShow="true" text="PLUS DE 10000 FILMS" />
+        <Newsletter />
+        <ArmDown />
+        <Footer />
     </div>
 </template>
 
@@ -168,11 +140,12 @@ await fetchCultesFilmDetails();
 .tout {
     background-color: black;
 }
+
 .card-container {
-    display: flex; 
+    display: flex;
     overflow-x: auto;
-    gap: 16px; 
-    padding: 10px; 
+    gap: 16px;
+    padding: 10px;
     background-color: black;
 }
 </style>

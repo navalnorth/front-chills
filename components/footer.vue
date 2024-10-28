@@ -9,7 +9,7 @@
       <div><img src="/assets/img/discord.png" alt="discord" width="45px" class="icon" /></div>
     </div>
     <div class="footer-question">
-      <p>UNE QUESTION ? <span><u><NuxtLink to="/contact">CONTACTEZ-NOUS !</NuxtLink></u></span></p>
+      <p>UNE QUESTION ? <span><NuxtLink to="/contact">CONTACTEZ-NOUS !</NuxtLink></span></p>
     </div>
 
     <!-- NOTRE CATALOGUE -->
@@ -21,7 +21,7 @@
       </div>
       <transition name="slide-fade">
         <div class="footer-link-clicked" v-show="isCatalogueOpen">
-          <div class="footer-link-clicked-item"><NuxtLink class="aLink" to="/hrreur"> NOUVEAUTES</NuxtLink></div>
+          <div class="footer-link-clicked-item"><NuxtLink class="aLink" to="/horreur"> NOUVEAUTES</NuxtLink></div>
           <div class="footer-link-clicked-item"><NuxtLink class="aLink" to="/horreur">NOTRE SELECTION HALLOWEEN</NuxtLink></div>
           <div class="footer-link-clicked-item"><NuxtLink class="aLink" to="/thriller"> FILMS CULTES</NuxtLink></div>
         </div>
@@ -55,7 +55,7 @@
         <NuxtLink to="/partenaires" class="footer-link-clicked-item">
           PARTENAIRES
         </NuxtLink>
-        <div class="footer-link-clicked-item"><NuxtLink class="aLink" to="/reles">Regles</NuxtLink></div>
+        <div class="footer-link-clicked-item"><NuxtLink class="aLink" to="/regles">Regles</NuxtLink></div>
         <div class="footer-link-clicked-item"><NuxtLink class="aLink" to="/mentions">Mentions legales</NuxtLink></div>
       </div>
     </transition>
@@ -145,9 +145,10 @@ const toggleLienUtile = () => {
 .footer-question p {
   font-weight: 800;
 }
-.footer-question span {
+.footer-question a {
   cursor: pointer;
   font-weight: 500;
+  color: white
 }
 
 .footer-link-content {
